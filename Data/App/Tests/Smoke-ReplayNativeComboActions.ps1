@@ -49,7 +49,7 @@ try{
     if(@($r.native_combo_segments|Where-Object{-not[bool]$_.authoritative_sequence}).Count-ne0){throw 'Combo sequence labels lost native-effect authority marker.'}
 
     $manifest=Get-Content -LiteralPath (Join-Path $AppDir 'app_manifest.json') -Raw -Encoding UTF8|ConvertFrom-Json
-    if([string]$manifest.app_version-ne'3.7.21'-or[int]$manifest.data_schemas.combo_action-ne2){throw ('Manifest combo contract mismatch: app='+$manifest.app_version+' combo='+$manifest.data_schemas.combo_action)}
+    if([string]$manifest.app_version-ne'3.7.22'-or[int]$manifest.data_schemas.combo_action-ne2){throw ('Manifest combo contract mismatch: app='+$manifest.app_version+' combo='+$manifest.data_schemas.combo_action)}
 
     # Dedicated labeled recordings become automatic real regressions after import to ReplayArchive.
     $dataDir=Split-Path -Parent $AppDir;$archive=Join-Path $dataDir 'ReplayArchive';$tele=Join-Path $AppDir 'QQReplayTelemetry.ps1'

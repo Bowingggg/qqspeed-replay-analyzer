@@ -130,6 +130,8 @@
 ```text
 <PROJECT_ROOT>\
 ├─ 启动前端.bat               # 唯一入口
+├─ LICENSE                    # MIT License
+├─ CONTRIBUTING.md            # 维护政策
 ├─ Data\
 │  ├─ App\                    # 程序源码、文档、测试
 │  │  ├─ QQReplayFrontend.ps1 # 前端服务入口
@@ -168,6 +170,23 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "Data\App\Tests\Smoke-Full.p
 
 ---
 
+## 项目维护方式
+
+本仓库主要作为**作者维护的源码发布仓库**。
+
+- 欢迎 fork、学习、引用、修改，并基于本项目开发自己的版本。
+- 当前**不接受外部 Pull Request**。
+- 当前**不提供 Issue 技术支持**。
+- 作者只按自己的开发节奏发布更新。
+- fork 或衍生版本请遵守 MIT License，保留版权与许可声明。
+- 衍生项目不得暗示得到原作者官方维护或背书。
+
+---
+
 ## License
 
-本项目**未附带开源许可证**。在作者明确给出许可证之前，默认保留所有权利（All rights reserved）：可以本地阅读与使用，但未授予再分发或修改后发布的许可。如果你需要一个明确的许可证，请先联系作者。
+**MIT License** — 版权所有 (c) 2026 Bowingggg。
+
+在 MIT License 条款下，任何人都可以自由地使用、复制、修改、合并、发布、分发、再授权（sublicense）以及销售本软件的副本，也可以商用；唯一条件是保留版权声明与本许可声明（见 `LICENSE`）。
+
+也就是说：**允许 fork、修改、引用、二次发布和商业使用**。

@@ -1,4 +1,4 @@
-﻿param(
+param(
     [string]$AppDir = (Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path))
 )
 $ErrorActionPreference='Stop'
@@ -33,7 +33,10 @@ $tests=@(
     'Smoke-CapabilityIndependence.ps1',
     'Smoke-ReplayLifecycle.ps1',
     'Smoke-ReplayReadContext.ps1',
-    'Validate-ModuleBoundaries.ps1'
+    'Validate-ModuleBoundaries.ps1',
+    # Publisher isolation: proves the public-release tooling cannot damage this repository and cannot
+    # publish identity-bearing or credential content. No network, no push, fully sandboxed.
+    'Smoke-PublisherIsolation.ps1'
 )
 $passed=0
 $sw=[System.Diagnostics.Stopwatch]::StartNew()
@@ -48,5 +51,5 @@ foreach($name in $tests){
 }
 $sw.Stop()
 Write-Host ''
-Write-Host ('[OK] Fast Gate passed. app=3.7.21 gate=fast tests='+$passed+'/'+$tests.Count+' real-replay=excluded structural=module-boundaries elapsed='+[Math]::Round($sw.Elapsed.TotalSeconds,1)+'s')
+Write-Host ('[OK] Fast Gate passed. app=3.7.22 gate=fast tests='+$passed+'/'+$tests.Count+' real-replay=excluded structural=module-boundaries elapsed='+[Math]::Round($sw.Elapsed.TotalSeconds,1)+'s')
 exit 0

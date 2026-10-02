@@ -1,6 +1,6 @@
 ﻿{
   "schema_version": 5,
-  "app_version": "3.7.21",
+  "app_version": "3.7.22",
   "architecture": "native_first_v1",
   "repository_stage": "git_baseline_v1",
   "entrypoints": {

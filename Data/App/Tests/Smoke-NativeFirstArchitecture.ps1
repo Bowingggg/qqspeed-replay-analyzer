@@ -5,7 +5,7 @@ function Read-Text([string]$Rel){$p=Join-Path $appDir $Rel;if(-not(Test-Path -Li
 function Require([bool]$Ok,[string]$Message){if(-not$Ok){throw $Message}}
 
 $manifest=(Read-Text 'app_manifest.json'|ConvertFrom-Json)
-Require ([string]$manifest.app_version -eq '3.7.21') 'app_version must be 3.7.21'
+Require ([string]$manifest.app_version -eq '3.7.22') 'app_version must be 3.7.22'
 Require ([string]$manifest.architecture -eq 'native_first_v1') 'manifest architecture mismatch'
 Require ([int]$manifest.data_schemas.analysis -eq 29) 'analysis schema must be 29'
 Require ([int]$manifest.data_schemas.analysis_segments -eq 3) 'analysis segment schema must be 3'
@@ -322,5 +322,5 @@ $idr=Read-Text 'Modules\Replay\Replay.MapIdentityResolver.ps1'
 Require ($idr.Contains("NativeIdentity\map_registry.json")) 'identity registry must live under NativeIdentity'
 Require (-not $idr.Contains("MapModels\map_registry.json")) 'identity registry must not recreate retired MapModels'
 
-Write-Host '[OK] Native-First Architecture v1 smoke passed. app=3.7.21 production=official-identity/production-telemetry/native-actions/map.nif(native-reader-v2)/native-driving-sections(detector-v3) combos=CW/WCW/CWW map-propulsion=2003 migration=absent semantic-fallback=none'
+Write-Host '[OK] Native-First Architecture v1 smoke passed. app=3.7.22 production=official-identity/production-telemetry/native-actions/map.nif(native-reader-v2)/native-driving-sections(detector-v3) combos=CW/WCW/CWW map-propulsion=2003 migration=absent semantic-fallback=none'
 exit 0
