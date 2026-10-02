@@ -1,0 +1,165 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QQ飞车录像分析</title>
+<link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">QQ飞车录像分析</div>
+  <span class="tag">v3.7.21 Native-First</span>
+  <span class="topState" id="topState">漂移分段</span>
+  <span class="spacer"></span>
+  <button class="btn dark" id="settingsBtn">设置</button>
+  <button class="btn danger" id="clearDerived" title="删除已生成的分析缓存，不删除原始录像">清空分析缓存</button>
+  <button class="btn primary" id="uploadBtn">添加录像</button>
+  <input id="fileInput" type="file" accept=".sav" multiple hidden>
+</header>
+
+<div class="shell" id="shell">
+  <aside class="side">
+    <div class="sideHead">
+      <div class="sideTitle"><span class="sideTitleLabel">录像</span><span class="sideTitleRight"><span id="count">0</span><button class="sideToggle" id="sideToggle" type="button" title="收起录像列表" aria-label="收起录像列表">‹</button></span></div>
+      <input class="search" id="search" placeholder="搜索录像 / 地图">
+    </div>
+    <div class="list" id="list"></div>
+  </aside>
+
+  <main class="main">
+    <div id="empty" class="empty">选择或添加一份 .sav 录像</div>
+    <div id="content" class="hidden">
+      <div class="recordHead">
+        <div>
+          <div class="recordTitle">
+            <h2 id="title">—</h2>
+            <span class="badge" id="mapBadge">赛道 —</span>
+          </div>
+          <div class="recordSub" id="fileHint">—</div>
+        </div>
+        <div class="recordMeta" id="recordMeta">—</div>
+      </div>
+
+      <section class="compareBar panel">
+        <div class="compareSide subjectSide">
+          <div class="compareIdentityHead">
+            <span class="identityLetter subject">A</span>
+            <div><b>当前录像</b><span id="currentReplayName">—</span></div>
+          </div>
+          <div class="lapPick current compareControl">
+            <label>当前圈</label>
+            <select id="currentLap"></select>
+          </div>
+        </div>
+
+        <div class="compareSummary">
+          <span id="compareState">未选择 B 对比对象</span>
+          <b id="lapDelta">—</b>
+          <small>A 相对 B · 直接显示快 / 慢</small>
+        </div>
+
+        <div class="compareSide referenceSide">
+          <div class="compareIdentityHead">
+            <span class="identityLetter reference">B</span>
+            <div><b>对比录像</b><span id="compareReplayName">未选择</span></div>
+          </div>
+          <div class="referenceControls">
+            <div class="lapPick compareReplay compareControl">
+              <label>录像</label>
+              <select id="compareReplay"><option value="">不对比</option></select>
+            </div>
+            <div class="lapPick compareLap compareControl">
+              <label>圈次</label>
+              <select id="compareLap" disabled><option value="">—</option></select>
+            </div>
+          </div>
+          <small class="compareRule" id="compareRule">默认不对比。</small>
+        </div>
+      </section>
+
+      <div class="workspace">
+        <section class="panel mapPanel">
+          <div class="panelHead">
+            <div>
+              <h3>赛道</h3>
+              <div class="subtle">自动区段来自 Native Drift；自定义路径只由 A 选择空间起终点，B 自动测同坐标区间</div>
+            </div>
+            <span class="spacer"></span>
+            <div class="routeModes" role="group" aria-label="路线显示模式">
+              <button class="modeBtn" data-route-mode="all">全部路线</button>
+              <button class="modeBtn active" data-route-mode="recovery">起漂→恢复结束</button>
+              <button class="modeBtn" data-route-mode="custom">自定义路径</button>
+              <button class="modeBtn customOnly hidden" id="clearCustomPath">清除</button>
+            </div>
+            <div class="mapTools">
+              <button class="tool" id="zoomOut">−</button>
+              <span id="zoomText">100%</span>
+              <button class="tool" id="zoomIn">+</button>
+              <button class="tool" id="resetView">复位</button>
+            </div>
+          </div>
+          <div class="mapWrap" id="mapWrap">
+            <aside class="panel inspector mapInspector" id="inspectorPanel">
+              <div class="sectorHead inspectorDragHandle" id="inspectorDragHandle" title="拖动当前区段面板">
+                <div>
+                  <span class="eyebrow">当前区段</span>
+                  <h3 id="sectorTitle">—</h3>
+                </div>
+                <div class="inspectorHeadActions">
+                  <span class="sectorIndex hidden" id="sectorIndex" aria-hidden="true">—</span>
+                  <button class="inspectorToggle" id="inspectorToggle" type="button" title="收起当前区段" aria-label="收起当前区段">−</button>
+                </div>
+              </div>
+              <div class="inspectorBody" id="inspectorBody">
+                <div class="inspectorIdentityPair" aria-label="当前与对比录像">
+                  <span class="identityChip subject"><i></i><b>A</b><em id="currentIdentityText">当前圈</em></span>
+                  <span class="identityChip reference hidden" id="compareIdentity"><i></i><b>B</b><em id="compareIdentityText">对比圈</em></span>
+                </div>
+                <div class="deltaHero neutral" id="deltaHero">
+                  <span id="sectorDeltaLabel">最终净结果</span>
+                  <b id="sectorDelta">—</b>
+                  <small class="inspectorCompat hidden" id="sectorDirection">先选择对比对象</small>
+                </div>
+                <div class="comparisonBreakdown hidden" id="comparisonBreakdown">
+                  <div><span>核心弯道</span><b id="coreDelta">—</b></div>
+                  <div><span>恢复收益</span><b id="recoveryGain">—</b></div>
+                </div>
+                <div class="timePair inspectorCompat hidden" aria-hidden="true">
+                  <div class="subject"><span><i class="identityLine"></i>A 当前圈</span><b id="subjectTime">—</b></div>
+                  <div class="reference"><span><i class="identityLine"></i>B 对比圈</span><b id="referenceTime">—</b></div>
+                </div>
+                <div class="sectorNote" id="sectorNote">全部路线只看轨迹；仅漂移按 Native Drift 工作；恢复模式使用双方共同边界；自定义路径只由 A 选择起终点，B 自动测同一空间区间。</div>
+                <div class="sectorMetrics" id="sectorMetrics"></div>
+                <div class="miniLegend inspectorCompat hidden" aria-hidden="true"><span class="legendTitle">结果</span><span><i class="dot loss"></i>当前更慢</span><span><i class="dot gain"></i>当前更快</span><span><i class="dot neutral"></i>持平 / 未比较</span></div>
+              </div>
+            </aside>
+            <canvas id="route"></canvas>
+          </div>
+          <div class="mapNote" id="mapNote">蓝色为当前圈；自动区段严格来自当前圈的 Native logical Drift。</div>
+        </section>
+      </div>
+
+      <details class="advanced panel">
+        <summary><span>高级 / 后续功能</span><small>后续指标暂不进入默认分析</small></summary>
+        <div class="advancedBody">
+          <div class="pending">默认链路固定为“圈1 → Native Drift 分段 → 明确选择同图录像/圈”。自定义路径模式用于人工核对任意局部：A 手选空间起终点，B 不再单独选择端点。</div>
+        </div>
+      </details>
+    </div>
+  </main>
+</div>
+
+<div id="settings" class="modal hidden">
+  <div class="dialog">
+    <div class="row"><h2 style="flex:1">设置</h2><button class="btn" id="closeSettings">关闭</button></div>
+    <div class="row"><input id="gamePath" placeholder="QQ飞车游戏目录"><button class="btn" id="browseGame">选择</button><button class="btn primary" id="saveGame">保存</button></div>
+    <div class="row"><button class="btn" id="refreshBtn">重新分析已导入录像</button><button class="btn" id="rebuildCatalog">重新初始化游戏资料</button></div>
+    <div class="pending" id="sysInfo">—</div>
+    <pre class="log" id="settingsLog">首次使用只需选择 QQ飞车 游戏目录；官方地图目录与绑定会自动在后台初始化。</pre>
+  </div>
+</div>
+<div id="error" class="error hidden"></div>
+<script src="/js/app.js"></script>
+</body>
+</html>

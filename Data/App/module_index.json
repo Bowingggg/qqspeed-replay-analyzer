@@ -1,0 +1,35 @@
+﻿{
+  "schema_version": 5,
+  "app_version": "3.7.21",
+  "architecture": "native_first_v1",
+  "repository_stage": "git_baseline_v1",
+  "entrypoints": {
+    "frontend": "QQReplayFrontend.ps1",
+    "analyze": "QQReplay.ps1",
+    "telemetry": "QQReplayTelemetry.ps1",
+    "native_map": "QQNativeMap.ps1",
+    "map_catalog": "QQSpeedMapCatalog.ps1",
+    "refresh": "QQReplayRefresh.ps1"
+  },
+  "production_modules": {
+    "replay": "Modules/Replay",
+    "map_catalog": "Modules/MapCatalog",
+    "telemetry": "Modules/Telemetry",
+    "native_analysis": "Modules/Native",
+    "frontend": "Modules/Frontend"
+  },
+  "validation": {
+    "fast": "Tests/Smoke-Fast.ps1",
+    "real_regression": "Tests/Smoke-RealRegression.ps1",
+    "full": "Tests/Smoke-Full.ps1",
+    "structure": "Tests/Validate-ModuleBoundaries.ps1",
+    "compat_full": "Tests/Smoke-NativeFirstV3Composite.ps1"
+  },
+  "context": {
+    "root_agent_rules": "AGENTS.md (repository root)",
+    "agent_rules": "AGENTS.md",
+    "status": "docs/STATUS.md",
+    "architecture": "docs/ARCHITECTURE.md",
+    "research_index": "docs/RESEARCH_INDEX.md"
+  }
+}

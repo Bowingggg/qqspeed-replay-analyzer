@@ -1,0 +1,76 @@
+# ============================================================================
+# QQ飞车录像分析器 — repository ignore policy
+#
+# Tracked  : Data/App/** (program source, docs, tests) + AGENTS.md + 启动前端.bat
+# Untracked: all runtime, user, derived and machine-local data under Data/**
+#
+# Rationale: the program is source; everything under Data/ except Data/App is
+# either user data (replays, labels), a derived cache, a diagnostic log, or
+# machine-local configuration. None of it belongs in Git history.
+# ============================================================================
+
+# --- User data: replays and local labels ---------------------------------
+# Raw .sav archives are the user's own recordings and must never be published.
+/Data/ReplayArchive/
+# The workspace-root replay drop folder. It holds the user's own recordings plus
+# sidecar ReplayData exports: a QQSpeed file name carries the player nickname and a
+# ReplayData export carries uin / nickname / race ids, so nothing here may ever be
+# staged. It is enumerated as local evidence only (see Tools/AnalysisClosure).
+/replay/
+# Replay Catalog: the local active/removed replay set. Runtime state, not source.
+/Data/ReplayCatalog/
+# Display labels / manual map names are local user state, not project source.
+/Data/replay_labels.json
+/Data/manual_map_names.json
+
+# --- Machine-local configuration (can contain absolute local paths) ------
+/Data/settings.json
+
+# --- Derived caches ------------------------------------------------------
+# Validated caches are preserved on disk but are reproducible build output.
+/Data/PhysicalTelemetryCache/
+/Data/NativeActionCache/
+/Data/Telemetry/
+/Data/NativeMaps/
+/Data/NativeIdentity/
+/Data/ReplayResolution/
+/Data/MapCatalog/
+
+# --- Runtime output, logs and diagnostics --------------------------------
+/Output/
+/Data/Logs/
+/Data/Diagnostics/
+/Data/WebUpload/
+
+# --- Retired architecture snapshot and legacy handoff (deleted 2026-09-30) ---
+# The V2 retired snapshot and the old handoff document were deleted from the
+# active workspace, so no agent can mistake them for current production
+# authority. The patterns are kept as defensive ignores so that an accidental
+# recreation can never re-enter the repository.
+/Data/Legacy/
+/Data/Project/PROJECT_HANDOFF.md
+
+# --- Workspace-root scratch ----------------------------------------------
+/Screenshot_*.jpg
+
+# --- Agent / editor / OS local state ------------------------------------
+.dsh-meow/
+.codex/
+.claude/
+.cursor/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# --- Archives, patches, scratch -----------------------------------------
+*.zip
+*.sha256
+*.patch
+*.tmp
+*.bak
+*.log
+bin/
+obj/
+TestResults/

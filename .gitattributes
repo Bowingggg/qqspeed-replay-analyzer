@@ -1,0 +1,34 @@
+# QQ飞车录像分析器 — line-ending and diff policy
+#
+# The worktree is LF-dominant, so LF is the canonical form for all text. This
+# keeps git diffs minimal and reviewable for GPT/DSH and avoids whole-file
+# "changed" diffs when an editor rewrites line endings.
+#
+# No cache or contract in this project hashes script source bytes: every
+# SHA256 binding is over replay .sav / map.nif data. Normalizing source line
+# endings therefore cannot invalidate PhysicalTelemetryCache or
+# NativeActionCache.
+* text=auto eol=lf
+
+# Windows batch launchers keep CRLF (cmd.exe label/goto handling).
+*.bat  text eol=crlf
+*.cmd  text eol=crlf
+
+# Explicit, self-documenting rules for the source and doc surfaces.
+*.ps1  text eol=lf
+*.psm1 text eol=lf
+*.cs   text eol=lf
+*.md   text eol=lf
+*.html text eol=lf
+*.css  text eol=lf
+*.js   text eol=lf
+*.json text eol=lf
+*.csv  text eol=lf
+
+# Binary replay / game data: never diff, never convert.
+*.sav  binary
+*.luc  binary
+*.nif  binary
+*.bin  binary
+*.jpg  binary
+*.png  binary

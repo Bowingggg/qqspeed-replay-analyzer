@@ -1,0 +1,39 @@
+{
+  "schema_version": 2,
+  "contract": "map_confirmation_required_v1",
+  "note": "Open GameMapID rows for which the current official game resources provide no authoritative Game->Resource evidence. `entries` is the OPEN set: an entry here is a recorded open question, not a resolution. Production may only use one of these rows after an explicit human confirmation is stored through `QQSpeedMapCatalog.ps1 -Mode UserBinding -UserBindingAction confirm`. As of the Map Identity Closure milestone the open set is empty: the three rows that used to be listed are resolved by the resource-declared identity (`Map\\Common Map\\MapNN\\LapDistanceFile.luc` field `mapId`), which is an official structural statement and needs neither a name join nor the +100 offset. Their closure is recorded under `closed_entries` for traceability.",
+  "policy": [
+    "authoritative routes are exactly: a verified anchor, a resource-declared game MapID (MapNN LapDistanceFile.luc mapId), a unique exact official name match, or an explicit user confirmation",
+    "a near/prefix name match never promotes",
+    "the observed game_map_id = resource_map_id + 100 relation is diagnostic evidence only and is recorded as a non-authoritative offset_supported_candidate; it is not universal",
+    "a game MapID declared by two resource folders is a conflict and fails closed as ambiguous_declared_map_id",
+    "trajectory, reference line and replay geometry are never map authority"
+  ],
+  "entries": [],
+  "closed_entries": [
+    {
+      "game_map_id": 439,
+      "game_display_name": "一梦青花",
+      "resource_map_id": 339,
+      "closed_by": "resource_declared_map_id",
+      "evidence": "Map339 LapDistanceFile.luc declares mapId=439 / mapName=一梦青花 (newest declaration; the oldest one still says 青花瓷). Map338 is a different course (jiangxi art vocabulary) and its descriptor-level duplicate name 绝色江西 is a stale scene-descriptor label. Map339's own art vocabulary is Qinghuaci.",
+      "closed_at_revision": "map_catalog_schema_6"
+    },
+    {
+      "game_map_id": 112,
+      "game_display_name": "老街管道",
+      "resource_map_id": 12,
+      "closed_by": "resource_declared_map_id",
+      "evidence": "Map12 LapDistanceFile.luc declares mapId=112 / mapName=老街管道. The scene descriptor's 老街 label was the only name evidence before, which is why the row used to be an offset-only candidate.",
+      "closed_at_revision": "map_catalog_schema_6"
+    },
+    {
+      "game_map_id": 325,
+      "game_display_name": "里约奥运会",
+      "resource_map_id": 225,
+      "closed_by": "resource_declared_map_id",
+      "evidence": "Map225 LapDistanceFile.luc declares mapId=325 / mapName=里约奥运会; Map226 declares mapId=326 / mapName=鹊桥情缘. The two identically named descriptor rows are distinguished by their own declared game MapIDs, so the ambiguity is resolved without a name heuristic.",
+      "closed_at_revision": "map_catalog_schema_6"
+    }
+  ]
+}

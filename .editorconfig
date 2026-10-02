@@ -1,0 +1,24 @@
+root = true
+
+[*]
+charset = utf-8
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.ps1]
+end_of_line = crlf
+indent_style = space
+indent_size = 4
+
+[*.cs]
+end_of_line = crlf
+indent_style = space
+indent_size = 4
+
+[*.{bat,cmd}]
+end_of_line = crlf
+
+[*.{md,json,html,css,js,csv}]
+end_of_line = lf
+indent_style = space
+indent_size = 2

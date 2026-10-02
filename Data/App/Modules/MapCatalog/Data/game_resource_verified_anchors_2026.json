@@ -1,0 +1,38 @@
+﻿{
+  "schema_version": 1,
+  "rule": "Verified cross-namespace anchors only; do not generalize +100 as universal authority.",
+  "anchors": [
+    {
+      "name": "十一城",
+      "game_map_id": 137,
+      "resource_map_id": 37,
+      "status": "verified_cross_namespace",
+      "game_evidence": "structured uires\\mapsel\\maps.luc id+mapid record",
+      "resource_evidence": "unique exact current MapCatalog name binding"
+    },
+    {
+      "name": "瓦特厂房",
+      "game_map_id": 153,
+      "resource_map_id": 53,
+      "status": "verified_cross_namespace",
+      "game_evidence": "structured uires\\mapsel\\maps.luc id+mapid record",
+      "resource_evidence": "unique exact-name hit in Map53 LapDistanceFile.luc; current catalog label 蒸汽时代1"
+    },
+    {
+      "name": "猫工厂",
+      "game_map_id": 154,
+      "resource_map_id": 54,
+      "status": "verified_cross_namespace",
+      "game_evidence": "structured uires\\mapsel\\maps.luc id+mapid record",
+      "resource_evidence": "unique exact-name hit in Map54 LapDistanceFile.luc; current catalog label 蒸汽时代2"
+    },
+    {
+      "name": "机械公园",
+      "game_map_id": 160,
+      "resource_map_id": 60,
+      "status": "verified_cross_namespace",
+      "game_evidence": "structured uires\\mapsel\\maps.luc id+mapid record",
+      "resource_evidence": "Map60 map_desc.map_name=机械公园 plus LapDistanceFile exact-name hit"
+    }
+  ]
+}

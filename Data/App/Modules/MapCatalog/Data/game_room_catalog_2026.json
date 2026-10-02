@@ -1,0 +1,2626 @@
+﻿{
+  "schema_version": 1,
+  "source": {
+    "client_context": "2026 current client sample supplied by user",
+    "vfs_path": "uires\\mapsel\\maps.luc",
+    "lua_version": "5.4",
+    "size_bytes": 200284,
+    "md5": "730B3359890B8569CB8475C816C667B5",
+    "extraction_method": "offline_structured_lua54_table_reconstruction",
+    "record_semantics": "room selection table record: id=<display name>, mapid=<game-side MapID>"
+  },
+  "stats": {
+    "record_count": 434,
+    "unique_game_map_id_count": 434,
+    "unique_name_count": 431,
+    "duplicate_names": [
+      "穿梭中···"
+    ]
+  },
+  "records": [
+    {
+      "name": "中国城",
+      "game_map_id": 104,
+      "source_pc": 579,
+      "proto_depth": 0
+    },
+    {
+      "name": "沉睡森林",
+      "game_map_id": 105,
+      "source_pc": 597,
+      "proto_depth": 0
+    },
+    {
+      "name": "城市体育馆",
+      "game_map_id": 108,
+      "source_pc": 615,
+      "proto_depth": 0
+    },
+    {
+      "name": "城市特区",
+      "game_map_id": 111,
+      "source_pc": 632,
+      "proto_depth": 0
+    },
+    {
+      "name": "老街管道",
+      "game_map_id": 112,
+      "source_pc": 650,
+      "proto_depth": 0
+    },
+    {
+      "name": "滨海沙滩",
+      "game_map_id": 113,
+      "source_pc": 668,
+      "proto_depth": 0
+    },
+    {
+      "name": "道具练习场",
+      "game_map_id": 114,
+      "source_pc": 693,
+      "proto_depth": 0
+    },
+    {
+      "name": "赛道测试-1-废弃",
+      "game_map_id": 115,
+      "source_pc": 711,
+      "proto_depth": 0
+    },
+    {
+      "name": "赛道测试-2-废弃",
+      "game_map_id": 116,
+      "source_pc": 730,
+      "proto_depth": 0
+    },
+    {
+      "name": "海洋公园",
+      "game_map_id": 118,
+      "source_pc": 747,
+      "proto_depth": 0
+    },
+    {
+      "name": "敦煌环道",
+      "game_map_id": 119,
+      "source_pc": 774,
+      "proto_depth": 0
+    },
+    {
+      "name": "城市游泳馆",
+      "game_map_id": 120,
+      "source_pc": 801,
+      "proto_depth": 0
+    },
+    {
+      "name": "海滨小镇",
+      "game_map_id": 121,
+      "source_pc": 828,
+      "proto_depth": 0
+    },
+    {
+      "name": "老街迷宫",
+      "game_map_id": 122,
+      "source_pc": 857,
+      "proto_depth": 0
+    },
+    {
+      "name": "古堡森林",
+      "game_map_id": 123,
+      "source_pc": 884,
+      "proto_depth": 0
+    },
+    {
+      "name": "敦煌石窟",
+      "game_map_id": 124,
+      "source_pc": 911,
+      "proto_depth": 0
+    },
+    {
+      "name": "城市火炬",
+      "game_map_id": 129,
+      "source_pc": 940,
+      "proto_depth": 0
+    },
+    {
+      "name": "敦煌峡谷",
+      "game_map_id": 130,
+      "source_pc": 967,
+      "proto_depth": 0
+    },
+    {
+      "name": "老街车站",
+      "game_map_id": 131,
+      "source_pc": 994,
+      "proto_depth": 0
+    },
+    {
+      "name": "老街工地",
+      "game_map_id": 132,
+      "source_pc": 1021,
+      "proto_depth": 0
+    },
+    {
+      "name": "海滨发卡",
+      "game_map_id": 133,
+      "source_pc": 1048,
+      "proto_depth": 0
+    },
+    {
+      "name": "中国田园",
+      "game_map_id": 134,
+      "source_pc": 1075,
+      "proto_depth": 0
+    },
+    {
+      "name": "中国钟楼",
+      "game_map_id": 135,
+      "source_pc": 1102,
+      "proto_depth": 0
+    },
+    {
+      "name": "老街仓库",
+      "game_map_id": 136,
+      "source_pc": 1129,
+      "proto_depth": 0
+    },
+    {
+      "name": "十一城",
+      "game_map_id": 137,
+      "source_pc": 1155,
+      "proto_depth": 0
+    },
+    {
+      "name": "都市迷情",
+      "game_map_id": 138,
+      "source_pc": 1184,
+      "proto_depth": 0
+    },
+    {
+      "name": "冰川甬道",
+      "game_map_id": 139,
+      "source_pc": 1211,
+      "proto_depth": 0
+    },
+    {
+      "name": "冰封谷",
+      "game_map_id": 140,
+      "source_pc": 1238,
+      "proto_depth": 0
+    },
+    {
+      "name": "熔岩古墓",
+      "game_map_id": 141,
+      "source_pc": 1265,
+      "proto_depth": 0
+    },
+    {
+      "name": "莲池幽径",
+      "game_map_id": 142,
+      "source_pc": 1292,
+      "proto_depth": 0
+    },
+    {
+      "name": "轨道23区",
+      "game_map_id": 143,
+      "source_pc": 1319,
+      "proto_depth": 0
+    },
+    {
+      "name": "云中漫步",
+      "game_map_id": 144,
+      "source_pc": 1346,
+      "proto_depth": 0
+    },
+    {
+      "name": "月牙湾",
+      "game_map_id": 145,
+      "source_pc": 1373,
+      "proto_depth": 0
+    },
+    {
+      "name": "情人结",
+      "game_map_id": 146,
+      "source_pc": 1400,
+      "proto_depth": 0
+    },
+    {
+      "name": "飞跃长城",
+      "game_map_id": 147,
+      "source_pc": 1427,
+      "proto_depth": 0
+    },
+    {
+      "name": "宝藏迷踪",
+      "game_map_id": 148,
+      "source_pc": 1454,
+      "proto_depth": 0
+    },
+    {
+      "name": "冰焰裂谷",
+      "game_map_id": 149,
+      "source_pc": 1482,
+      "proto_depth": 0
+    },
+    {
+      "name": "飞跃长城II",
+      "game_map_id": 150,
+      "source_pc": 1509,
+      "proto_depth": 0
+    },
+    {
+      "name": "极速列车",
+      "game_map_id": 151,
+      "source_pc": 1536,
+      "proto_depth": 0
+    },
+    {
+      "name": "老街船厂",
+      "game_map_id": 152,
+      "source_pc": 1565,
+      "proto_depth": 0
+    },
+    {
+      "name": "瓦特厂房",
+      "game_map_id": 153,
+      "source_pc": 1592,
+      "proto_depth": 0
+    },
+    {
+      "name": "猫工厂",
+      "game_map_id": 154,
+      "source_pc": 1619,
+      "proto_depth": 0
+    },
+    {
+      "name": "猫美拉竞技场",
+      "game_map_id": 155,
+      "source_pc": 1646,
+      "proto_depth": 0
+    },
+    {
+      "name": "刀锋峡谷竞技场",
+      "game_map_id": 156,
+      "source_pc": 1664,
+      "proto_depth": 0
+    },
+    {
+      "name": "黄金之城竞技场",
+      "game_map_id": 157,
+      "source_pc": 1682,
+      "proto_depth": 0
+    },
+    {
+      "name": "玫瑰之恋",
+      "game_map_id": 158,
+      "source_pc": 1700,
+      "proto_depth": 0
+    },
+    {
+      "name": "云之彼端",
+      "game_map_id": 159,
+      "source_pc": 1727,
+      "proto_depth": 0
+    },
+    {
+      "name": "机械公园",
+      "game_map_id": 160,
+      "source_pc": 1754,
+      "proto_depth": 0
+    },
+    {
+      "name": "余晖岛",
+      "game_map_id": 161,
+      "source_pc": 1781,
+      "proto_depth": 0
+    },
+    {
+      "name": "彩虹风车岛",
+      "game_map_id": 162,
+      "source_pc": 1808,
+      "proto_depth": 0
+    },
+    {
+      "name": "春天的新想乐",
+      "game_map_id": 163,
+      "source_pc": 1837,
+      "proto_depth": 0
+    },
+    {
+      "name": "太空迷航",
+      "game_map_id": 164,
+      "source_pc": 1864,
+      "proto_depth": 0
+    },
+    {
+      "name": "穿梭之城",
+      "game_map_id": 165,
+      "source_pc": 1891,
+      "proto_depth": 0
+    },
+    {
+      "name": "鹊桥仙境",
+      "game_map_id": 166,
+      "source_pc": 1918,
+      "proto_depth": 0
+    },
+    {
+      "name": "秋名山",
+      "game_map_id": 167,
+      "source_pc": 1945,
+      "proto_depth": 0
+    },
+    {
+      "name": "镜像十一城",
+      "game_map_id": 168,
+      "source_pc": 1974,
+      "proto_depth": 0
+    },
+    {
+      "name": "风林火山",
+      "game_map_id": 169,
+      "source_pc": 2003,
+      "proto_depth": 0
+    },
+    {
+      "name": "海贼王的宝藏",
+      "game_map_id": 170,
+      "source_pc": 2030,
+      "proto_depth": 0
+    },
+    {
+      "name": "冰上圆舞曲",
+      "game_map_id": 171,
+      "source_pc": 2059,
+      "proto_depth": 0
+    },
+    {
+      "name": "樱花富士山",
+      "game_map_id": 173,
+      "source_pc": 2088,
+      "proto_depth": 0
+    },
+    {
+      "name": "天堂之城",
+      "game_map_id": 174,
+      "source_pc": 2115,
+      "proto_depth": 0
+    },
+    {
+      "name": "琳琅天上",
+      "game_map_id": 175,
+      "source_pc": 2142,
+      "proto_depth": 0
+    },
+    {
+      "name": "甜心大教堂",
+      "game_map_id": 176,
+      "source_pc": 2169,
+      "proto_depth": 0
+    },
+    {
+      "name": "水城威尼斯",
+      "game_map_id": 177,
+      "source_pc": 2196,
+      "proto_depth": 0
+    },
+    {
+      "name": "大漠客栈",
+      "game_map_id": 178,
+      "source_pc": 2223,
+      "proto_depth": 0
+    },
+    {
+      "name": "宇航公园",
+      "game_map_id": 179,
+      "source_pc": 2250,
+      "proto_depth": 0
+    },
+    {
+      "name": "酷比空间",
+      "game_map_id": 180,
+      "source_pc": 2277,
+      "proto_depth": 0
+    },
+    {
+      "name": "古城秘境",
+      "game_map_id": 181,
+      "source_pc": 2295,
+      "proto_depth": 0
+    },
+    {
+      "name": "天国的阶梯",
+      "game_map_id": 182,
+      "source_pc": 2322,
+      "proto_depth": 0
+    },
+    {
+      "name": "法老金字塔",
+      "game_map_id": 183,
+      "source_pc": 2349,
+      "proto_depth": 0
+    },
+    {
+      "name": "暮光之城",
+      "game_map_id": 184,
+      "source_pc": 2376,
+      "proto_depth": 0
+    },
+    {
+      "name": "港湾发卡",
+      "game_map_id": 185,
+      "source_pc": 2403,
+      "proto_depth": 0
+    },
+    {
+      "name": "冰川滑雪场",
+      "game_map_id": 186,
+      "source_pc": 2432,
+      "proto_depth": 0
+    },
+    {
+      "name": "320冒险岛",
+      "game_map_id": 187,
+      "source_pc": 2459,
+      "proto_depth": 0
+    },
+    {
+      "name": "太空竞技场",
+      "game_map_id": 188,
+      "source_pc": 2488,
+      "proto_depth": 0
+    },
+    {
+      "name": "特区高速",
+      "game_map_id": 189,
+      "source_pc": 2515,
+      "proto_depth": 0
+    },
+    {
+      "name": "燕子坞",
+      "game_map_id": 190,
+      "source_pc": 2534,
+      "proto_depth": 0
+    },
+    {
+      "name": "星际彩虹",
+      "game_map_id": 191,
+      "source_pc": 2564,
+      "proto_depth": 0
+    },
+    {
+      "name": "旋转木马",
+      "game_map_id": 192,
+      "source_pc": 2591,
+      "proto_depth": 0
+    },
+    {
+      "name": "海岸城",
+      "game_map_id": 193,
+      "source_pc": 2618,
+      "proto_depth": 0
+    },
+    {
+      "name": "西部矿山",
+      "game_map_id": 194,
+      "source_pc": 2645,
+      "proto_depth": 0
+    },
+    {
+      "name": "桃花坞",
+      "game_map_id": 195,
+      "source_pc": 2672,
+      "proto_depth": 0
+    },
+    {
+      "name": "银月谷",
+      "game_map_id": 196,
+      "source_pc": 2699,
+      "proto_depth": 0
+    },
+    {
+      "name": "冰雪长城",
+      "game_map_id": 197,
+      "source_pc": 2728,
+      "proto_depth": 0
+    },
+    {
+      "name": "瑞雪春堂",
+      "game_map_id": 198,
+      "source_pc": 2755,
+      "proto_depth": 0
+    },
+    {
+      "name": "爱琴海",
+      "game_map_id": 199,
+      "source_pc": 2784,
+      "proto_depth": 0
+    },
+    {
+      "name": "玛雅古迹",
+      "game_map_id": 200,
+      "source_pc": 2812,
+      "proto_depth": 0
+    },
+    {
+      "name": "镜像游泳馆",
+      "game_map_id": 201,
+      "source_pc": 2839,
+      "proto_depth": 0
+    },
+    {
+      "name": "迷雾沼泽",
+      "game_map_id": 202,
+      "source_pc": 2866,
+      "proto_depth": 0
+    },
+    {
+      "name": "撒哈拉古墓",
+      "game_map_id": 203,
+      "source_pc": 2895,
+      "proto_depth": 0
+    },
+    {
+      "name": "玄灵峡谷",
+      "game_map_id": 204,
+      "source_pc": 2922,
+      "proto_depth": 0
+    },
+    {
+      "name": "城市运动会",
+      "game_map_id": 205,
+      "source_pc": 2951,
+      "proto_depth": 0
+    },
+    {
+      "name": "巨人国大冒险",
+      "game_map_id": 206,
+      "source_pc": 2978,
+      "proto_depth": 0
+    },
+    {
+      "name": "海滨仲夏",
+      "game_map_id": 207,
+      "source_pc": 3005,
+      "proto_depth": 0
+    },
+    {
+      "name": "亚特兰蒂斯",
+      "game_map_id": 208,
+      "source_pc": 3032,
+      "proto_depth": 0
+    },
+    {
+      "name": "深海宝藏",
+      "game_map_id": 211,
+      "source_pc": 3059,
+      "proto_depth": 0
+    },
+    {
+      "name": "赤城红叶",
+      "game_map_id": 212,
+      "source_pc": 3086,
+      "proto_depth": 0
+    },
+    {
+      "name": "祖玛神殿",
+      "game_map_id": 213,
+      "source_pc": 3113,
+      "proto_depth": 0
+    },
+    {
+      "name": "魔法森林",
+      "game_map_id": 214,
+      "source_pc": 3140,
+      "proto_depth": 0
+    },
+    {
+      "name": "镜像海滨小镇",
+      "game_map_id": 215,
+      "source_pc": 3167,
+      "proto_depth": 0
+    },
+    {
+      "name": "琳琅海湾",
+      "game_map_id": 216,
+      "source_pc": 3194,
+      "proto_depth": 0
+    },
+    {
+      "name": "极速梦想",
+      "game_map_id": 217,
+      "source_pc": 3221,
+      "proto_depth": 0
+    },
+    {
+      "name": "江南水乡",
+      "game_map_id": 218,
+      "source_pc": 3248,
+      "proto_depth": 0
+    },
+    {
+      "name": "芝麻街",
+      "game_map_id": 219,
+      "source_pc": 3275,
+      "proto_depth": 0
+    },
+    {
+      "name": "落日海港",
+      "game_map_id": 220,
+      "source_pc": 3305,
+      "proto_depth": 0
+    },
+    {
+      "name": "木叶忍者村",
+      "game_map_id": 221,
+      "source_pc": 3332,
+      "proto_depth": 0
+    },
+    {
+      "name": "玉龙雪脉",
+      "game_map_id": 222,
+      "source_pc": 3359,
+      "proto_depth": 0
+    },
+    {
+      "name": "丘比特花园",
+      "game_map_id": 224,
+      "source_pc": 3386,
+      "proto_depth": 0
+    },
+    {
+      "name": "袋鼠岛",
+      "game_map_id": 225,
+      "source_pc": 3413,
+      "proto_depth": 0
+    },
+    {
+      "name": "机械迷城",
+      "game_map_id": 226,
+      "source_pc": 3440,
+      "proto_depth": 0
+    },
+    {
+      "name": "幽灵古堡",
+      "game_map_id": 227,
+      "source_pc": 3467,
+      "proto_depth": 0
+    },
+    {
+      "name": "虚空基地",
+      "game_map_id": 228,
+      "source_pc": 3496,
+      "proto_depth": 0
+    },
+    {
+      "name": "潘多拉之星",
+      "game_map_id": 229,
+      "source_pc": 3523,
+      "proto_depth": 0
+    },
+    {
+      "name": "咕噜星",
+      "game_map_id": 230,
+      "source_pc": 3550,
+      "proto_depth": 0
+    },
+    {
+      "name": "66号公路",
+      "game_map_id": 231,
+      "source_pc": 3569,
+      "proto_depth": 0
+    },
+    {
+      "name": "绿野仙踪",
+      "game_map_id": 232,
+      "source_pc": 3598,
+      "proto_depth": 0
+    },
+    {
+      "name": "糖果乐园",
+      "game_map_id": 233,
+      "source_pc": 3625,
+      "proto_depth": 0
+    },
+    {
+      "name": "欢乐海岸",
+      "game_map_id": 234,
+      "source_pc": 3652,
+      "proto_depth": 0
+    },
+    {
+      "name": "雪地拉力",
+      "game_map_id": 235,
+      "source_pc": 3679,
+      "proto_depth": 0
+    },
+    {
+      "name": "极速之城",
+      "game_map_id": 237,
+      "source_pc": 3708,
+      "proto_depth": 0
+    },
+    {
+      "name": "ʱ֮ɳ",
+      "game_map_id": 238,
+      "source_pc": 3735,
+      "proto_depth": 0
+    },
+    {
+      "name": "森林发卡",
+      "game_map_id": 239,
+      "source_pc": 3764,
+      "proto_depth": 0
+    },
+    {
+      "name": "田园新干线",
+      "game_map_id": 240,
+      "source_pc": 3791,
+      "proto_depth": 0
+    },
+    {
+      "name": "机甲体育馆",
+      "game_map_id": 241,
+      "source_pc": 3818,
+      "proto_depth": 0
+    },
+    {
+      "name": "机甲风林火山",
+      "game_map_id": 242,
+      "source_pc": 3833,
+      "proto_depth": 0
+    },
+    {
+      "name": "未来城市",
+      "game_map_id": 243,
+      "source_pc": 3851,
+      "proto_depth": 0
+    },
+    {
+      "name": "薰衣草庄园",
+      "game_map_id": 244,
+      "source_pc": 3878,
+      "proto_depth": 0
+    },
+    {
+      "name": "精灵领地",
+      "game_map_id": 245,
+      "source_pc": 3905,
+      "proto_depth": 0
+    },
+    {
+      "name": "冰雪小镇",
+      "game_map_id": 246,
+      "source_pc": 3932,
+      "proto_depth": 0
+    },
+    {
+      "name": "机甲新想乐",
+      "game_map_id": 247,
+      "source_pc": 3961,
+      "proto_depth": 0
+    },
+    {
+      "name": "机甲玫瑰之恋",
+      "game_map_id": 248,
+      "source_pc": 3979,
+      "proto_depth": 0
+    },
+    {
+      "name": "机甲余晖岛",
+      "game_map_id": 249,
+      "source_pc": 3997,
+      "proto_depth": 0
+    },
+    {
+      "name": "勇者部落",
+      "game_map_id": 250,
+      "source_pc": 4015,
+      "proto_depth": 0
+    },
+    {
+      "name": "迷境之缘",
+      "game_map_id": 251,
+      "source_pc": 4042,
+      "proto_depth": 0
+    },
+    {
+      "name": "马达加斯加",
+      "game_map_id": 253,
+      "source_pc": 4069,
+      "proto_depth": 0
+    },
+    {
+      "name": "沁园春",
+      "game_map_id": 254,
+      "source_pc": 4098,
+      "proto_depth": 0
+    },
+    {
+      "name": "极地冰镇",
+      "game_map_id": 255,
+      "source_pc": 4128,
+      "proto_depth": 0
+    },
+    {
+      "name": "城市网吧",
+      "game_map_id": 256,
+      "source_pc": 4157,
+      "proto_depth": 0
+    },
+    {
+      "name": "西川古镇",
+      "game_map_id": 257,
+      "source_pc": 4186,
+      "proto_depth": 0
+    },
+    {
+      "name": "魔法学院",
+      "game_map_id": 258,
+      "source_pc": 4213,
+      "proto_depth": 0
+    },
+    {
+      "name": "章鱼的八宝舟",
+      "game_map_id": 259,
+      "source_pc": 4242,
+      "proto_depth": 0
+    },
+    {
+      "name": "情迷法兰西",
+      "game_map_id": 260,
+      "source_pc": 4269,
+      "proto_depth": 0
+    },
+    {
+      "name": "广寒仙境",
+      "game_map_id": 261,
+      "source_pc": 4298,
+      "proto_depth": 0
+    },
+    {
+      "name": "雪地拉力II",
+      "game_map_id": 262,
+      "source_pc": 4327,
+      "proto_depth": 0
+    },
+    {
+      "name": "风车牧场",
+      "game_map_id": 263,
+      "source_pc": 4354,
+      "proto_depth": 0
+    },
+    {
+      "name": "鸭鸭水乐园",
+      "game_map_id": 264,
+      "source_pc": 4383,
+      "proto_depth": 0
+    },
+    {
+      "name": "甜蜜冲刺",
+      "game_map_id": 265,
+      "source_pc": 4412,
+      "proto_depth": 0
+    },
+    {
+      "name": "天空之城",
+      "game_map_id": 266,
+      "source_pc": 4441,
+      "proto_depth": 0
+    },
+    {
+      "name": "龙门新春",
+      "game_map_id": 267,
+      "source_pc": 4470,
+      "proto_depth": 0
+    },
+    {
+      "name": "我们恋爱吧",
+      "game_map_id": 268,
+      "source_pc": 4499,
+      "proto_depth": 0
+    },
+    {
+      "name": "奇迹之城",
+      "game_map_id": 600,
+      "source_pc": 4528,
+      "proto_depth": 0
+    },
+    {
+      "name": "极速冲刺",
+      "game_map_id": 601,
+      "source_pc": 4549,
+      "proto_depth": 0
+    },
+    {
+      "name": "情定巴黎",
+      "game_map_id": 602,
+      "source_pc": 4570,
+      "proto_depth": 0
+    },
+    {
+      "name": "忍者去哪儿",
+      "game_map_id": 269,
+      "source_pc": 4591,
+      "proto_depth": 0
+    },
+    {
+      "name": "51区",
+      "game_map_id": 270,
+      "source_pc": 4620,
+      "proto_depth": 0
+    },
+    {
+      "name": "极速长城",
+      "game_map_id": 606,
+      "source_pc": 4649,
+      "proto_depth": 0
+    },
+    {
+      "name": "回音山谷",
+      "game_map_id": 607,
+      "source_pc": 4669,
+      "proto_depth": 0
+    },
+    {
+      "name": "机甲落日海港",
+      "game_map_id": 271,
+      "source_pc": 4690,
+      "proto_depth": 0
+    },
+    {
+      "name": "机甲咕噜星",
+      "game_map_id": 272,
+      "source_pc": 4708,
+      "proto_depth": 0
+    },
+    {
+      "name": "雪地大冒险",
+      "game_map_id": 273,
+      "source_pc": 4726,
+      "proto_depth": 0
+    },
+    {
+      "name": "巨龙的山谷",
+      "game_map_id": 274,
+      "source_pc": 4755,
+      "proto_depth": 0
+    },
+    {
+      "name": "地中海初夏",
+      "game_map_id": 608,
+      "source_pc": 4782,
+      "proto_depth": 0
+    },
+    {
+      "name": "飞过云端",
+      "game_map_id": 609,
+      "source_pc": 4802,
+      "proto_depth": 0
+    },
+    {
+      "name": "世界杯狂想曲",
+      "game_map_id": 610,
+      "source_pc": 4822,
+      "proto_depth": 0
+    },
+    {
+      "name": "风吹过的夏天",
+      "game_map_id": 276,
+      "source_pc": 4842,
+      "proto_depth": 0
+    },
+    {
+      "name": "月光之城",
+      "game_map_id": 275,
+      "source_pc": 4871,
+      "proto_depth": 0
+    },
+    {
+      "name": "烟花六月",
+      "game_map_id": 611,
+      "source_pc": 4900,
+      "proto_depth": 0
+    },
+    {
+      "name": "托马斯火山湖",
+      "game_map_id": 277,
+      "source_pc": 4920,
+      "proto_depth": 0
+    },
+    {
+      "name": "迷失之城",
+      "game_map_id": 278,
+      "source_pc": 4949,
+      "proto_depth": 0
+    },
+    {
+      "name": "起风了",
+      "game_map_id": 612,
+      "source_pc": 4978,
+      "proto_depth": 0
+    },
+    {
+      "name": "雪地冲刺",
+      "game_map_id": 613,
+      "source_pc": 4999,
+      "proto_depth": 0
+    },
+    {
+      "name": "极速核电站",
+      "game_map_id": 279,
+      "source_pc": 5019,
+      "proto_depth": 0
+    },
+    {
+      "name": "疯狂马戏团",
+      "game_map_id": 280,
+      "source_pc": 5048,
+      "proto_depth": 0
+    },
+    {
+      "name": "樱兰高校",
+      "game_map_id": 614,
+      "source_pc": 5077,
+      "proto_depth": 0
+    },
+    {
+      "name": "波斯古迹",
+      "game_map_id": 615,
+      "source_pc": 5098,
+      "proto_depth": 0
+    },
+    {
+      "name": "罗马竞技场",
+      "game_map_id": 281,
+      "source_pc": 5119,
+      "proto_depth": 0
+    },
+    {
+      "name": "萌怪星球",
+      "game_map_id": 282,
+      "source_pc": 5146,
+      "proto_depth": 0
+    },
+    {
+      "name": "都市魅影",
+      "game_map_id": 616,
+      "source_pc": 5175,
+      "proto_depth": 0
+    },
+    {
+      "name": "仙林幻境",
+      "game_map_id": 617,
+      "source_pc": 5196,
+      "proto_depth": 0
+    },
+    {
+      "name": "秋之物语",
+      "game_map_id": 283,
+      "source_pc": 5215,
+      "proto_depth": 0
+    },
+    {
+      "name": "舒马赫赛车场",
+      "game_map_id": 284,
+      "source_pc": 5244,
+      "proto_depth": 0
+    },
+    {
+      "name": "冰封之城",
+      "game_map_id": 618,
+      "source_pc": 5273,
+      "proto_depth": 0
+    },
+    {
+      "name": "极速核电站轮滑版",
+      "game_map_id": 619,
+      "source_pc": 5294,
+      "proto_depth": 0
+    },
+    {
+      "name": "云端小镇",
+      "game_map_id": 290,
+      "source_pc": 5315,
+      "proto_depth": 0
+    },
+    {
+      "name": "美洲大峡谷(挑战版)",
+      "game_map_id": 291,
+      "source_pc": 5344,
+      "proto_depth": 0
+    },
+    {
+      "name": "美洲大峡谷",
+      "game_map_id": 292,
+      "source_pc": 5373,
+      "proto_depth": 0
+    },
+    {
+      "name": "樱花富士山轮滑版",
+      "game_map_id": 620,
+      "source_pc": 5403,
+      "proto_depth": 0
+    },
+    {
+      "name": "极地冰镇轮滑版",
+      "game_map_id": 621,
+      "source_pc": 5425,
+      "proto_depth": 0
+    },
+    {
+      "name": "吉之岛",
+      "game_map_id": 294,
+      "source_pc": 5446,
+      "proto_depth": 0
+    },
+    {
+      "name": "浪漫冬日",
+      "game_map_id": 622,
+      "source_pc": 5475,
+      "proto_depth": 0
+    },
+    {
+      "name": "春风唐韵",
+      "game_map_id": 295,
+      "source_pc": 5496,
+      "proto_depth": 0
+    },
+    {
+      "name": "龙门新春轮滑",
+      "game_map_id": 623,
+      "source_pc": 5525,
+      "proto_depth": 0
+    },
+    {
+      "name": "法老领地",
+      "game_map_id": 624,
+      "source_pc": 5546,
+      "proto_depth": 0
+    },
+    {
+      "name": "天堂之城轮滑版",
+      "game_map_id": 625,
+      "source_pc": 5567,
+      "proto_depth": 0
+    },
+    {
+      "name": "Duang!弹珠",
+      "game_map_id": 297,
+      "source_pc": 5588,
+      "proto_depth": 0
+    },
+    {
+      "name": "精灵之森",
+      "game_map_id": 296,
+      "source_pc": 5617,
+      "proto_depth": 0
+    },
+    {
+      "name": "海湾军港",
+      "game_map_id": 626,
+      "source_pc": 5646,
+      "proto_depth": 0
+    },
+    {
+      "name": "雪域冰城",
+      "game_map_id": 298,
+      "source_pc": 5667,
+      "proto_depth": 0
+    },
+    {
+      "name": "风车牧场轮滑版",
+      "game_map_id": 627,
+      "source_pc": 5696,
+      "proto_depth": 0
+    },
+    {
+      "name": "小猪部落",
+      "game_map_id": 299,
+      "source_pc": 5717,
+      "proto_depth": 0
+    },
+    {
+      "name": "太空新纪元",
+      "game_map_id": 300,
+      "source_pc": 5746,
+      "proto_depth": 0
+    },
+    {
+      "name": "城市网吧轮滑版",
+      "game_map_id": 628,
+      "source_pc": 5775,
+      "proto_depth": 0
+    },
+    {
+      "name": "原野山丘",
+      "game_map_id": 629,
+      "source_pc": 5796,
+      "proto_depth": 0
+    },
+    {
+      "name": "国境之南",
+      "game_map_id": 301,
+      "source_pc": 5817,
+      "proto_depth": 0
+    },
+    {
+      "name": "维京海港",
+      "game_map_id": 302,
+      "source_pc": 5846,
+      "proto_depth": 0
+    },
+    {
+      "name": "糖果秘境",
+      "game_map_id": 303,
+      "source_pc": 5875,
+      "proto_depth": 0
+    },
+    {
+      "name": "枫林物语",
+      "game_map_id": 630,
+      "source_pc": 5904,
+      "proto_depth": 0
+    },
+    {
+      "name": "国境之南轮滑版",
+      "game_map_id": 631,
+      "source_pc": 5925,
+      "proto_depth": 0
+    },
+    {
+      "name": "兔兔复活岛",
+      "game_map_id": 304,
+      "source_pc": 5946,
+      "proto_depth": 0
+    },
+    {
+      "name": "峡谷狂飙",
+      "game_map_id": 305,
+      "source_pc": 5975,
+      "proto_depth": 0
+    },
+    {
+      "name": "薰衣草庄园轮滑版",
+      "game_map_id": 632,
+      "source_pc": 6004,
+      "proto_depth": 0
+    },
+    {
+      "name": "精灵之森轮滑版",
+      "game_map_id": 633,
+      "source_pc": 6025,
+      "proto_depth": 0
+    },
+    {
+      "name": "火线舒马赫",
+      "game_map_id": 306,
+      "source_pc": 6046,
+      "proto_depth": 0
+    },
+    {
+      "name": "侏罗纪公园",
+      "game_map_id": 307,
+      "source_pc": 6066,
+      "proto_depth": 0
+    },
+    {
+      "name": "里约大冒险",
+      "game_map_id": 308,
+      "source_pc": 6095,
+      "proto_depth": 0
+    },
+    {
+      "name": "空岛",
+      "game_map_id": 309,
+      "source_pc": 6124,
+      "proto_depth": 0
+    },
+    {
+      "name": "火线特区高速",
+      "game_map_id": 902,
+      "source_pc": 6153,
+      "proto_depth": 0
+    },
+    {
+      "name": "火线穿梭之城",
+      "game_map_id": 901,
+      "source_pc": 6173,
+      "proto_depth": 0
+    },
+    {
+      "name": "火线落日海港",
+      "game_map_id": 903,
+      "source_pc": 6193,
+      "proto_depth": 0
+    },
+    {
+      "name": "火线金门大桥",
+      "game_map_id": 906,
+      "source_pc": 6213,
+      "proto_depth": 0
+    },
+    {
+      "name": "火线午夜狂飙",
+      "game_map_id": 907,
+      "source_pc": 6233,
+      "proto_depth": 0
+    },
+    {
+      "name": "火线51区",
+      "game_map_id": 904,
+      "source_pc": 6253,
+      "proto_depth": 0
+    },
+    {
+      "name": "火线雪域冰城",
+      "game_map_id": 905,
+      "source_pc": 6273,
+      "proto_depth": 0
+    },
+    {
+      "name": "萌怪星球轮滑版",
+      "game_map_id": 634,
+      "source_pc": 6293,
+      "proto_depth": 0
+    },
+    {
+      "name": "火线工厂",
+      "game_map_id": 908,
+      "source_pc": 6314,
+      "proto_depth": 0
+    },
+    {
+      "name": "火线龙门新春",
+      "game_map_id": 909,
+      "source_pc": 6334,
+      "proto_depth": 0
+    },
+    {
+      "name": "火线荒野飙客",
+      "game_map_id": 910,
+      "source_pc": 6354,
+      "proto_depth": 0
+    },
+    {
+      "name": "维京海港轮滑版",
+      "game_map_id": 635,
+      "source_pc": 6374,
+      "proto_depth": 0
+    },
+    {
+      "name": "王国之路",
+      "game_map_id": 310,
+      "source_pc": 6395,
+      "proto_depth": 0
+    },
+    {
+      "name": "月夜巫堡",
+      "game_map_id": 311,
+      "source_pc": 6424,
+      "proto_depth": 0
+    },
+    {
+      "name": "玩具总动员",
+      "game_map_id": 312,
+      "source_pc": 6453,
+      "proto_depth": 0
+    },
+    {
+      "name": "王国之路轮滑版",
+      "game_map_id": 636,
+      "source_pc": 6482,
+      "proto_depth": 0
+    },
+    {
+      "name": "欢乐抢金币",
+      "game_map_id": 313,
+      "source_pc": 6503,
+      "proto_depth": 0
+    },
+    {
+      "name": "happy！大眼萌",
+      "game_map_id": 314,
+      "source_pc": 6521,
+      "proto_depth": 0
+    },
+    {
+      "name": "午夜狂飙",
+      "game_map_id": 315,
+      "source_pc": 6550,
+      "proto_depth": 0
+    },
+    {
+      "name": "猴园春色",
+      "game_map_id": 316,
+      "source_pc": 6579,
+      "proto_depth": 0
+    },
+    {
+      "name": "海绵幻想世界",
+      "game_map_id": 317,
+      "source_pc": 6609,
+      "proto_depth": 0
+    },
+    {
+      "name": "勇闯巨人国",
+      "game_map_id": 318,
+      "source_pc": 6638,
+      "proto_depth": 0
+    },
+    {
+      "name": "春风唐韵轮滑版",
+      "game_map_id": 637,
+      "source_pc": 6667,
+      "proto_depth": 0
+    },
+    {
+      "name": "我们恋爱吧轮滑版",
+      "game_map_id": 638,
+      "source_pc": 6688,
+      "proto_depth": 0
+    },
+    {
+      "name": "happy！大眼萌轮滑版",
+      "game_map_id": 639,
+      "source_pc": 6709,
+      "proto_depth": 0
+    },
+    {
+      "name": "糖果秘境轮滑版",
+      "game_map_id": 640,
+      "source_pc": 6730,
+      "proto_depth": 0
+    },
+    {
+      "name": "香波岛",
+      "game_map_id": 319,
+      "source_pc": 6751,
+      "proto_depth": 0
+    },
+    {
+      "name": "神隐之国",
+      "game_map_id": 320,
+      "source_pc": 6780,
+      "proto_depth": 0
+    },
+    {
+      "name": "木叶物语",
+      "game_map_id": 321,
+      "source_pc": 6809,
+      "proto_depth": 0
+    },
+    {
+      "name": "疯狂玩具城",
+      "game_map_id": 652,
+      "source_pc": 6838,
+      "proto_depth": 0
+    },
+    {
+      "name": "熊猫村",
+      "game_map_id": 322,
+      "source_pc": 6859,
+      "proto_depth": 0
+    },
+    {
+      "name": "云端小镇轮滑版",
+      "game_map_id": 641,
+      "source_pc": 6888,
+      "proto_depth": 0
+    },
+    {
+      "name": "冰雪企鹅岛",
+      "game_map_id": 323,
+      "source_pc": 6909,
+      "proto_depth": 0
+    },
+    {
+      "name": "阳光码头",
+      "game_map_id": 324,
+      "source_pc": 6938,
+      "proto_depth": 0
+    },
+    {
+      "name": "舒马赫赛车场轮滑版",
+      "game_map_id": 653,
+      "source_pc": 6967,
+      "proto_depth": 0
+    },
+    {
+      "name": "里约奥运会",
+      "game_map_id": 325,
+      "source_pc": 6988,
+      "proto_depth": 0
+    },
+    {
+      "name": "鹊桥情缘",
+      "game_map_id": 326,
+      "source_pc": 7009,
+      "proto_depth": 0
+    },
+    {
+      "name": "枫叶谷",
+      "game_map_id": 327,
+      "source_pc": 7038,
+      "proto_depth": 0
+    },
+    {
+      "name": "侏罗纪公园轮滑版",
+      "game_map_id": 654,
+      "source_pc": 7067,
+      "proto_depth": 0
+    },
+    {
+      "name": "洛杉矶",
+      "game_map_id": 328,
+      "source_pc": 7088,
+      "proto_depth": 0
+    },
+    {
+      "name": "兔兔复活岛轮滑版",
+      "game_map_id": 655,
+      "source_pc": 7117,
+      "proto_depth": 0
+    },
+    {
+      "name": "霍比特之旅",
+      "game_map_id": 329,
+      "source_pc": 7138,
+      "proto_depth": 0
+    },
+    {
+      "name": "情迷爱琴海",
+      "game_map_id": 330,
+      "source_pc": 7167,
+      "proto_depth": 0
+    },
+    {
+      "name": "圣诞奇缘",
+      "game_map_id": 331,
+      "source_pc": 7196,
+      "proto_depth": 0
+    },
+    {
+      "name": "1号公路",
+      "game_map_id": 332,
+      "source_pc": 7225,
+      "proto_depth": 0
+    },
+    {
+      "name": "阳光码头轮滑版",
+      "game_map_id": 656,
+      "source_pc": 7254,
+      "proto_depth": 0
+    },
+    {
+      "name": "香波岛轮滑版",
+      "game_map_id": 657,
+      "source_pc": 7275,
+      "proto_depth": 0
+    },
+    {
+      "name": "9年时光路",
+      "game_map_id": 333,
+      "source_pc": 7296,
+      "proto_depth": 0
+    },
+    {
+      "name": "梦幻珊瑚海",
+      "game_map_id": 334,
+      "source_pc": 7325,
+      "proto_depth": 0
+    },
+    {
+      "name": "洛杉矶轮滑版",
+      "game_map_id": 658,
+      "source_pc": 7354,
+      "proto_depth": 0
+    },
+    {
+      "name": "魔龙猎场",
+      "game_map_id": 338,
+      "source_pc": 7375,
+      "proto_depth": 0
+    },
+    {
+      "name": "火星基地",
+      "game_map_id": 339,
+      "source_pc": 7404,
+      "proto_depth": 0
+    },
+    {
+      "name": "电音之都",
+      "game_map_id": 341,
+      "source_pc": 7433,
+      "proto_depth": 0
+    },
+    {
+      "name": "情迷爱琴海轮滑版",
+      "game_map_id": 659,
+      "source_pc": 7462,
+      "proto_depth": 0
+    },
+    {
+      "name": "测结算专用",
+      "game_map_id": 335,
+      "source_pc": 7483,
+      "proto_depth": 0
+    },
+    {
+      "name": "矿山小镇",
+      "game_map_id": 340,
+      "source_pc": 7501,
+      "proto_depth": 0
+    },
+    {
+      "name": "魔龙猎场轮滑版",
+      "game_map_id": 660,
+      "source_pc": 7530,
+      "proto_depth": 0
+    },
+    {
+      "name": "苏格兰场",
+      "game_map_id": 342,
+      "source_pc": 7551,
+      "proto_depth": 0
+    },
+    {
+      "name": "樱花祭",
+      "game_map_id": 343,
+      "source_pc": 7580,
+      "proto_depth": 0
+    },
+    {
+      "name": "太空边境",
+      "game_map_id": 345,
+      "source_pc": 7609,
+      "proto_depth": 0
+    },
+    {
+      "name": "梦幻珊瑚海轮滑版",
+      "game_map_id": 661,
+      "source_pc": 7638,
+      "proto_depth": 0
+    },
+    {
+      "name": "樱花祭轮滑版",
+      "game_map_id": 662,
+      "source_pc": 7659,
+      "proto_depth": 0
+    },
+    {
+      "name": "VANS机场",
+      "game_map_id": 346,
+      "source_pc": 7680,
+      "proto_depth": 0
+    },
+    {
+      "name": "VANS机场轮滑版",
+      "game_map_id": 663,
+      "source_pc": 7709,
+      "proto_depth": 0
+    },
+    {
+      "name": "广寒仙境轮滑版",
+      "game_map_id": 664,
+      "source_pc": 7730,
+      "proto_depth": 0
+    },
+    {
+      "name": "因特拉肯",
+      "game_map_id": 347,
+      "source_pc": 7751,
+      "proto_depth": 0
+    },
+    {
+      "name": "雪山遗迹",
+      "game_map_id": 348,
+      "source_pc": 7780,
+      "proto_depth": 0
+    },
+    {
+      "name": "花落夏海",
+      "game_map_id": 349,
+      "source_pc": 7809,
+      "proto_depth": 0
+    },
+    {
+      "name": "失落神殿",
+      "game_map_id": 350,
+      "source_pc": 7838,
+      "proto_depth": 0
+    },
+    {
+      "name": "莫高窟",
+      "game_map_id": 351,
+      "source_pc": 7867,
+      "proto_depth": 0
+    },
+    {
+      "name": "晶焰矿山",
+      "game_map_id": 352,
+      "source_pc": 7897,
+      "proto_depth": 0
+    },
+    {
+      "name": "小猪部落轮滑版",
+      "game_map_id": 665,
+      "source_pc": 7926,
+      "proto_depth": 0
+    },
+    {
+      "name": "天空树",
+      "game_map_id": 353,
+      "source_pc": 7947,
+      "proto_depth": 0
+    },
+    {
+      "name": "龙宫",
+      "game_map_id": 354,
+      "source_pc": 7976,
+      "proto_depth": 0
+    },
+    {
+      "name": "圣诞奇缘轮滑版",
+      "game_map_id": 666,
+      "source_pc": 8005,
+      "proto_depth": 0
+    },
+    {
+      "name": "金门大桥",
+      "game_map_id": 357,
+      "source_pc": 8026,
+      "proto_depth": 0
+    },
+    {
+      "name": "萌犬贺春",
+      "game_map_id": 355,
+      "source_pc": 8046,
+      "proto_depth": 0
+    },
+    {
+      "name": "龙腾灯海",
+      "game_map_id": 356,
+      "source_pc": 8075,
+      "proto_depth": 0
+    },
+    {
+      "name": "天空树轮滑版",
+      "game_map_id": 667,
+      "source_pc": 8104,
+      "proto_depth": 0
+    },
+    {
+      "name": "星星火车站",
+      "game_map_id": 358,
+      "source_pc": 8125,
+      "proto_depth": 0
+    },
+    {
+      "name": "恶龙城",
+      "game_map_id": 359,
+      "source_pc": 8154,
+      "proto_depth": 0
+    },
+    {
+      "name": "萌犬贺春轮滑版",
+      "game_map_id": 668,
+      "source_pc": 8183,
+      "proto_depth": 0
+    },
+    {
+      "name": "王者峡谷",
+      "game_map_id": 360,
+      "source_pc": 8204,
+      "proto_depth": 0
+    },
+    {
+      "name": "南国海岛",
+      "game_map_id": 361,
+      "source_pc": 8233,
+      "proto_depth": 0
+    },
+    {
+      "name": "星星火车站轮滑版",
+      "game_map_id": 669,
+      "source_pc": 8262,
+      "proto_depth": 0
+    },
+    {
+      "name": "狂野追逐工业之都",
+      "game_map_id": 362,
+      "source_pc": 8283,
+      "proto_depth": 0
+    },
+    {
+      "name": "梦幻水乐园",
+      "game_map_id": 363,
+      "source_pc": 8303,
+      "proto_depth": 0
+    },
+    {
+      "name": "梦回波斯湾",
+      "game_map_id": 364,
+      "source_pc": 8332,
+      "proto_depth": 0
+    },
+    {
+      "name": "南国海岛轮滑版",
+      "game_map_id": 670,
+      "source_pc": 8361,
+      "proto_depth": 0
+    },
+    {
+      "name": "西湖",
+      "game_map_id": 365,
+      "source_pc": 8382,
+      "proto_depth": 0
+    },
+    {
+      "name": "时光静域",
+      "game_map_id": 366,
+      "source_pc": 8411,
+      "proto_depth": 0
+    },
+    {
+      "name": "晶焰矿山轮滑版",
+      "game_map_id": 671,
+      "source_pc": 8440,
+      "proto_depth": 0
+    },
+    {
+      "name": "蜂之蜜语",
+      "game_map_id": 367,
+      "source_pc": 8461,
+      "proto_depth": 0
+    },
+    {
+      "name": "恶龙城轮滑版",
+      "game_map_id": 672,
+      "source_pc": 8490,
+      "proto_depth": 0
+    },
+    {
+      "name": "亡灵序曲",
+      "game_map_id": 368,
+      "source_pc": 8511,
+      "proto_depth": 0
+    },
+    {
+      "name": "原野之歌",
+      "game_map_id": 369,
+      "source_pc": 8540,
+      "proto_depth": 0
+    },
+    {
+      "name": "西湖轮滑版",
+      "game_map_id": 673,
+      "source_pc": 8569,
+      "proto_depth": 0
+    },
+    {
+      "name": "卡帕多西亚",
+      "game_map_id": 370,
+      "source_pc": 8590,
+      "proto_depth": 0
+    },
+    {
+      "name": "人鱼岛探险",
+      "game_map_id": 371,
+      "source_pc": 8619,
+      "proto_depth": 0
+    },
+    {
+      "name": "西部荒野",
+      "game_map_id": 372,
+      "source_pc": 8648,
+      "proto_depth": 0
+    },
+    {
+      "name": "卡帕多西亚轮滑版",
+      "game_map_id": 674,
+      "source_pc": 8677,
+      "proto_depth": 0
+    },
+    {
+      "name": "阿拉丁",
+      "game_map_id": 373,
+      "source_pc": 8698,
+      "proto_depth": 0
+    },
+    {
+      "name": "夜鸣沙都",
+      "game_map_id": 374,
+      "source_pc": 8727,
+      "proto_depth": 0
+    },
+    {
+      "name": "西部荒野轮滑版",
+      "game_map_id": 675,
+      "source_pc": 8756,
+      "proto_depth": 0
+    },
+    {
+      "name": "阿拉丁轮滑版",
+      "game_map_id": 676,
+      "source_pc": 8777,
+      "proto_depth": 0
+    },
+    {
+      "name": "故园归醉",
+      "game_map_id": 376,
+      "source_pc": 8798,
+      "proto_depth": 0
+    },
+    {
+      "name": "繁花巴比伦",
+      "game_map_id": 377,
+      "source_pc": 8827,
+      "proto_depth": 0
+    },
+    {
+      "name": "英伦古堡",
+      "game_map_id": 378,
+      "source_pc": 8856,
+      "proto_depth": 0
+    },
+    {
+      "name": "梦回波斯湾轮滑版",
+      "game_map_id": 677,
+      "source_pc": 8885,
+      "proto_depth": 0
+    },
+    {
+      "name": "桃源剑阁",
+      "game_map_id": 379,
+      "source_pc": 8906,
+      "proto_depth": 0
+    },
+    {
+      "name": "玄门幽谷",
+      "game_map_id": 380,
+      "source_pc": 8935,
+      "proto_depth": 0
+    },
+    {
+      "name": "TROY-零号试验场",
+      "game_map_id": 381,
+      "source_pc": 8964,
+      "proto_depth": 0
+    },
+    {
+      "name": "TROY-熔炼车间",
+      "game_map_id": 382,
+      "source_pc": 8993,
+      "proto_depth": 0
+    },
+    {
+      "name": "繁花巴比伦轮滑版",
+      "game_map_id": 678,
+      "source_pc": 9014,
+      "proto_depth": 0
+    },
+    {
+      "name": "秘境大闯关",
+      "game_map_id": 383,
+      "source_pc": 9036,
+      "proto_depth": 0
+    },
+    {
+      "name": "北海渔场",
+      "game_map_id": 384,
+      "source_pc": 9056,
+      "proto_depth": 0
+    },
+    {
+      "name": "电音梦工厂",
+      "game_map_id": 385,
+      "source_pc": 9085,
+      "proto_depth": 0
+    },
+    {
+      "name": "幻音城假日",
+      "game_map_id": 386,
+      "source_pc": 9114,
+      "proto_depth": 0
+    },
+    {
+      "name": "雷霆军港",
+      "game_map_id": 387,
+      "source_pc": 9143,
+      "proto_depth": 0
+    },
+    {
+      "name": "飞跃神州",
+      "game_map_id": 389,
+      "source_pc": 9172,
+      "proto_depth": 0
+    },
+    {
+      "name": "利维坦激流",
+      "game_map_id": 390,
+      "source_pc": 9203,
+      "proto_depth": 0
+    },
+    {
+      "name": "冰原前哨",
+      "game_map_id": 391,
+      "source_pc": 9232,
+      "proto_depth": 0
+    },
+    {
+      "name": "幻海遗迹",
+      "game_map_id": 392,
+      "source_pc": 9261,
+      "proto_depth": 0
+    },
+    {
+      "name": "长城",
+      "game_map_id": 393,
+      "source_pc": 9290,
+      "proto_depth": 0
+    },
+    {
+      "name": "新天鹅堡",
+      "game_map_id": 394,
+      "source_pc": 9319,
+      "proto_depth": 0
+    },
+    {
+      "name": "科隆大教堂",
+      "game_map_id": 395,
+      "source_pc": 9348,
+      "proto_depth": 0
+    },
+    {
+      "name": "一路向黔",
+      "game_map_id": 396,
+      "source_pc": 9377,
+      "proto_depth": 0
+    },
+    {
+      "name": "千户苗寨",
+      "game_map_id": 397,
+      "source_pc": 9406,
+      "proto_depth": 0
+    },
+    {
+      "name": "星梦游乐园",
+      "game_map_id": 398,
+      "source_pc": 9435,
+      "proto_depth": 0
+    },
+    {
+      "name": "云梦泽",
+      "game_map_id": 399,
+      "source_pc": 9464,
+      "proto_depth": 0
+    },
+    {
+      "name": "炎光王城",
+      "game_map_id": 400,
+      "source_pc": 9493,
+      "proto_depth": 0
+    },
+    {
+      "name": "甜糕与滚滚",
+      "game_map_id": 402,
+      "source_pc": 9522,
+      "proto_depth": 0
+    },
+    {
+      "name": "滚筒回旋",
+      "game_map_id": 407,
+      "source_pc": 9542,
+      "proto_depth": 0
+    },
+    {
+      "name": "时钟转转",
+      "game_map_id": 401,
+      "source_pc": 9562,
+      "proto_depth": 0
+    },
+    {
+      "name": "杠上开花",
+      "game_map_id": 405,
+      "source_pc": 9582,
+      "proto_depth": 0
+    },
+    {
+      "name": "丰收的风车谷",
+      "game_map_id": 408,
+      "source_pc": 9602,
+      "proto_depth": 0
+    },
+    {
+      "name": "秋去冬来",
+      "game_map_id": 403,
+      "source_pc": 9622,
+      "proto_depth": 0
+    },
+    {
+      "name": "麦浪滚滚",
+      "game_map_id": 412,
+      "source_pc": 9642,
+      "proto_depth": 0
+    },
+    {
+      "name": "莲叶田田",
+      "game_map_id": 409,
+      "source_pc": 9662,
+      "proto_depth": 0
+    },
+    {
+      "name": "水车转转",
+      "game_map_id": 411,
+      "source_pc": 9682,
+      "proto_depth": 0
+    },
+    {
+      "name": "阿尔法总部",
+      "game_map_id": 404,
+      "source_pc": 9702,
+      "proto_depth": 0
+    },
+    {
+      "name": "聆风镇",
+      "game_map_id": 406,
+      "source_pc": 9731,
+      "proto_depth": 0
+    },
+    {
+      "name": "testmap",
+      "game_map_id": 413,
+      "source_pc": 9760,
+      "proto_depth": 0
+    },
+    {
+      "name": "顺子大作战",
+      "game_map_id": 414,
+      "source_pc": 9780,
+      "proto_depth": 0
+    },
+    {
+      "name": "云游天府",
+      "game_map_id": 415,
+      "source_pc": 9800,
+      "proto_depth": 0
+    },
+    {
+      "name": "梦回古蜀",
+      "game_map_id": 416,
+      "source_pc": 9829,
+      "proto_depth": 0
+    },
+    {
+      "name": "极限大闯关",
+      "game_map_id": 417,
+      "source_pc": 9858,
+      "proto_depth": 0
+    },
+    {
+      "name": "海滨之眼",
+      "game_map_id": 418,
+      "source_pc": 9878,
+      "proto_depth": 0
+    },
+    {
+      "name": "快速测结算用",
+      "game_map_id": 419,
+      "source_pc": 9907,
+      "proto_depth": 0
+    },
+    {
+      "name": "山雪游龙",
+      "game_map_id": 420,
+      "source_pc": 9927,
+      "proto_depth": 0
+    },
+    {
+      "name": "京华冬梦",
+      "game_map_id": 421,
+      "source_pc": 9956,
+      "proto_depth": 0
+    },
+    {
+      "name": "雾山枫吟",
+      "game_map_id": 422,
+      "source_pc": 9985,
+      "proto_depth": 0
+    },
+    {
+      "name": "天宫乘梦",
+      "game_map_id": 423,
+      "source_pc": 10014,
+      "proto_depth": 0
+    },
+    {
+      "name": "极速航天城",
+      "game_map_id": 424,
+      "source_pc": 10043,
+      "proto_depth": 0
+    },
+    {
+      "name": "龙门大闯关",
+      "game_map_id": 426,
+      "source_pc": 10072,
+      "proto_depth": 0
+    },
+    {
+      "name": "恋恋千阳",
+      "game_map_id": 427,
+      "source_pc": 10092,
+      "proto_depth": 0
+    },
+    {
+      "name": "黄河万里奔流",
+      "game_map_id": 428,
+      "source_pc": 10121,
+      "proto_depth": 0
+    },
+    {
+      "name": "神都千古恒照",
+      "game_map_id": 429,
+      "source_pc": 10150,
+      "proto_depth": 0
+    },
+    {
+      "name": "雪山之巅",
+      "game_map_id": 430,
+      "source_pc": 10179,
+      "proto_depth": 0
+    },
+    {
+      "name": "龙晶大闯关",
+      "game_map_id": 431,
+      "source_pc": 10208,
+      "proto_depth": 0
+    },
+    {
+      "name": "流觞曲水",
+      "game_map_id": 436,
+      "source_pc": 10228,
+      "proto_depth": 0
+    },
+    {
+      "name": "天玑阁",
+      "game_map_id": 433,
+      "source_pc": 10257,
+      "proto_depth": 0
+    },
+    {
+      "name": "超弦基地",
+      "game_map_id": 434,
+      "source_pc": 10286,
+      "proto_depth": 0
+    },
+    {
+      "name": "熔炉角斗场",
+      "game_map_id": 435,
+      "source_pc": 10315,
+      "proto_depth": 0
+    },
+    {
+      "name": "幻域大闯关",
+      "game_map_id": 432,
+      "source_pc": 10344,
+      "proto_depth": 0
+    },
+    {
+      "name": "冰雪欢乐城",
+      "game_map_id": 446,
+      "source_pc": 10364,
+      "proto_depth": 0
+    },
+    {
+      "name": "绝色江西",
+      "game_map_id": 438,
+      "source_pc": 10393,
+      "proto_depth": 0
+    },
+    {
+      "name": "一梦青花",
+      "game_map_id": 439,
+      "source_pc": 10422,
+      "proto_depth": 0
+    },
+    {
+      "name": "涂鸦赛",
+      "game_map_id": 440,
+      "source_pc": 10451,
+      "proto_depth": 0
+    },
+    {
+      "name": "极星幻域",
+      "game_map_id": 441,
+      "source_pc": 10471,
+      "proto_depth": 0
+    },
+    {
+      "name": "喷喷竞技场",
+      "game_map_id": 442,
+      "source_pc": 10502,
+      "proto_depth": 0
+    },
+    {
+      "name": "Ϳѻ02",
+      "game_map_id": 443,
+      "source_pc": 10522,
+      "proto_depth": 0
+    },
+    {
+      "name": "涂“鸭”乐园",
+      "game_map_id": 444,
+      "source_pc": 10542,
+      "proto_depth": 0
+    },
+    {
+      "name": "缤纷夏日",
+      "game_map_id": 449,
+      "source_pc": 10562,
+      "proto_depth": 0
+    },
+    {
+      "name": "伊甸掠影",
+      "game_map_id": 447,
+      "source_pc": 10591,
+      "proto_depth": 0
+    },
+    {
+      "name": "足球场",
+      "game_map_id": 451,
+      "source_pc": 10620,
+      "proto_depth": 0
+    },
+    {
+      "name": "雪境裂渊",
+      "game_map_id": 448,
+      "source_pc": 10641,
+      "proto_depth": 0
+    },
+    {
+      "name": "雾山五行",
+      "game_map_id": 450,
+      "source_pc": 10670,
+      "proto_depth": 0
+    },
+    {
+      "name": "冲刺大闯关",
+      "game_map_id": 452,
+      "source_pc": 10699,
+      "proto_depth": 0
+    },
+    {
+      "name": "飞驰新疆",
+      "game_map_id": 453,
+      "source_pc": 10720,
+      "proto_depth": 0
+    },
+    {
+      "name": "千年丝路",
+      "game_map_id": 455,
+      "source_pc": 10749,
+      "proto_depth": 0
+    },
+    {
+      "name": "泰坦之巅",
+      "game_map_id": 456,
+      "source_pc": 10778,
+      "proto_depth": 0
+    },
+    {
+      "name": "蛇蛇大作战",
+      "game_map_id": 457,
+      "source_pc": 10807,
+      "proto_depth": 0
+    },
+    {
+      "name": "霆城新港",
+      "game_map_id": 458,
+      "source_pc": 10828,
+      "proto_depth": 0
+    },
+    {
+      "name": "灵蛇传说",
+      "game_map_id": 459,
+      "source_pc": 10857,
+      "proto_depth": 0
+    },
+    {
+      "name": "特洛伊环城",
+      "game_map_id": 460,
+      "source_pc": 10886,
+      "proto_depth": 0
+    },
+    {
+      "name": "端午竞渡",
+      "game_map_id": 461,
+      "source_pc": 10915,
+      "proto_depth": 0
+    },
+    {
+      "name": "丛林派对",
+      "game_map_id": 462,
+      "source_pc": 10944,
+      "proto_depth": 0
+    },
+    {
+      "name": "绿野逐风",
+      "game_map_id": 463,
+      "source_pc": 10973,
+      "proto_depth": 0
+    },
+    {
+      "name": "跃动大闯关",
+      "game_map_id": 464,
+      "source_pc": 11002,
+      "proto_depth": 0
+    },
+    {
+      "name": "云涌天门",
+      "game_map_id": 465,
+      "source_pc": 11023,
+      "proto_depth": 0
+    },
+    {
+      "name": "夜游潇湘",
+      "game_map_id": 466,
+      "source_pc": 11052,
+      "proto_depth": 0
+    },
+    {
+      "name": "序列中枢",
+      "game_map_id": 467,
+      "source_pc": 11081,
+      "proto_depth": 0
+    },
+    {
+      "name": "试车房",
+      "game_map_id": 468,
+      "source_pc": 11110,
+      "proto_depth": 0
+    },
+    {
+      "name": "踏雪寻春",
+      "game_map_id": 469,
+      "source_pc": 11129,
+      "proto_depth": 0
+    },
+    {
+      "name": "梦溯长安",
+      "game_map_id": 470,
+      "source_pc": 11158,
+      "proto_depth": 0
+    },
+    {
+      "name": "浪漫海滨",
+      "game_map_id": 471,
+      "source_pc": 11187,
+      "proto_depth": 0
+    },
+    {
+      "name": "兰亭古镇",
+      "game_map_id": 472,
+      "source_pc": 11216,
+      "proto_depth": 0
+    },
+    {
+      "name": "西部矿山II",
+      "game_map_id": 473,
+      "source_pc": 11245,
+      "proto_depth": 0
+    },
+    {
+      "name": "猫梦浮屋",
+      "game_map_id": 474,
+      "source_pc": 11274,
+      "proto_depth": 0
+    },
+    {
+      "name": "钩索大闯关",
+      "game_map_id": 475,
+      "source_pc": 11303,
+      "proto_depth": 0
+    },
+    {
+      "name": "Test03",
+      "game_map_id": 497,
+      "source_pc": 11322,
+      "proto_depth": 0
+    },
+    {
+      "name": "Test02",
+      "game_map_id": 498,
+      "source_pc": 11342,
+      "proto_depth": 0
+    },
+    {
+      "name": "赛道UGC",
+      "game_map_id": 499,
+      "source_pc": 11362,
+      "proto_depth": 0
+    },
+    {
+      "name": "阳光海滨",
+      "game_map_id": 10001,
+      "source_pc": 11406,
+      "proto_depth": 0
+    },
+    {
+      "name": "现代城市",
+      "game_map_id": 10002,
+      "source_pc": 11429,
+      "proto_depth": 0
+    },
+    {
+      "name": "太空城",
+      "game_map_id": 10003,
+      "source_pc": 11452,
+      "proto_depth": 0
+    },
+    {
+      "name": "世界名胜",
+      "game_map_id": 10004,
+      "source_pc": 11475,
+      "proto_depth": 0
+    },
+    {
+      "name": "中国风",
+      "game_map_id": 10005,
+      "source_pc": 11498,
+      "proto_depth": 0
+    },
+    {
+      "name": "幻想国度",
+      "game_map_id": 10006,
+      "source_pc": 11521,
+      "proto_depth": 0
+    },
+    {
+      "name": "古典老街",
+      "game_map_id": 10007,
+      "source_pc": 11544,
+      "proto_depth": 0
+    },
+    {
+      "name": "冰天雪地",
+      "game_map_id": 10008,
+      "source_pc": 11567,
+      "proto_depth": 0
+    },
+    {
+      "name": "极限挑战",
+      "game_map_id": 344,
+      "source_pc": 11590,
+      "proto_depth": 0
+    },
+    {
+      "name": "穿梭中···",
+      "game_map_id": 288,
+      "source_pc": 11606,
+      "proto_depth": 0
+    },
+    {
+      "name": "穿梭中···",
+      "game_map_id": 289,
+      "source_pc": 11622,
+      "proto_depth": 0
+    },
+    {
+      "name": "穿梭中···",
+      "game_map_id": 642,
+      "source_pc": 11638,
+      "proto_depth": 0
+    },
+    {
+      "name": "穿梭中···",
+      "game_map_id": 643,
+      "source_pc": 11654,
+      "proto_depth": 0
+    },
+    {
+      "name": "找不到地图，请重登尝试",
+      "game_map_id": -1,
+      "source_pc": 11711,
+      "proto_depth": 0
+    }
+  ]
+}
