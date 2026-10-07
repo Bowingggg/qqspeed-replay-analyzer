@@ -91,6 +91,7 @@ function recordDurationText(r){const local=(r?.streams||[]).find(s=>s.role==='lo
 function localStream(t){return t?.streams?.find(s=>s.role==='local_high_frequency')||t?.streams?.[0]||null}
 function networkStreams(t){return (t?.streams||[]).filter(s=>s.role==='network_low_frequency')}
 function isInternalStreamCompare(){return compareFile===currentFile&&!!compareInternalStreamId}
+function isSameReplayLapCompare(){return compareFile===currentFile&&!compareInternalStreamId}
 function referenceStream(){return isInternalStreamCompare()?compareStream:(compareFile===currentFile?stream:compareStream)}
 function compareTargetKeyForStream(s){return `__stream__:${String(s?.id||s?.stream_id||'')}`}
 function streamIdOf(s){return String(s?.id||s?.stream_id||'')}
@@ -729,12 +730,18 @@ function currentLapExists(lap){return !!(stream?.laps||[]).some(l=>String(l.lap)
 function referenceLapExists(lap){const s=referenceStream();return !!(s?.laps||[]).some(l=>String(l.lap)===String(lap))}
 async function syncCompareLapToCurrent(){
   if(!compareFile)return;
+  // Same-replay lap comparison intentionally keeps A and B independent.  When A moves onto B's
+  // current lap, rebuildCompareLapOptions selects another real lap instead of collapsing both sides
+  // onto the same lap. External replays / network shadows keep the established same-lap sync.
+  if(isSameReplayLapCompare()){await rebuildCompareLapOptions();return}
   const target=String(currentLap||'');
   if(!target)return;
   if(referenceLapExists(target))compareLap=target;
   await rebuildCompareLapOptions();
 }
 async function syncCurrentLapToCompare(){
+  // B is an independent lap selector when both sides come from the same local replay.
+  if(isSameReplayLapCompare()){await rebuildCompareLapOptions();return}
   const target=String(compareLap||'');
   if(!target)return;
   if(currentLapExists(target))currentLap=target;
@@ -757,11 +764,13 @@ async function buildSelectors(){
   cur.onchange=async()=>{currentLap=cur.value;resetCustomPath();selectedSector=null;hoverSector=null;await syncCompareLapToCurrent();renderAll()};
 
   cmpReplay.innerHTML='<option value="">不对比</option>';
+  const self=currentRecord(),selfComparable=laps.length>1;
+  if(selfComparable){const o=document.createElement('option');o.value=currentFile;o.textContent=`本录像 · 圈间比较 · ${laps.length}圈`;o.title='比较同一录像中的两个不同圈次';cmpReplay.appendChild(o)}
   const nets=networkStreams(telemetry);
   for(const ns of nets){const o=document.createElement('option');o.value=compareTargetKeyForStream(ns);const hz=Number(ns?.sample_hz);o.textContent=`本录像 · 联网低频影子${streamIdOf(ns)?' · '+streamIdOf(ns):''}${Number.isFinite(hz)?' · '+fmt(hz,2)+'Hz':''}`;cmpReplay.appendChild(o)}
-  const self=currentRecord(),external=[];
+  const external=[];
   for(const r of records){if(r.file===currentFile||!sameMapCompatible(self,r))continue;external.push(r);const o=document.createElement('option');o.value=r.file;const shortName=compactReplayLabel(r)||'录像';o.textContent=`${shortName} · ${recordDurationText(r)}`;o.title=labelOf(r);cmpReplay.appendChild(o)}
-  const hasCompareTarget=nets.length>0||external.length>0;
+  const hasCompareTarget=selfComparable||nets.length>0||external.length>0;
   setCompareControlEnabled(hasCompareTarget);
   if(!hasCompareTarget){compareFile='';compareLap='';compareInternalStreamId='';cmpReplay.value='';await rebuildCompareLapOptions();return}
   if(isInternalStreamCompare()){cmpReplay.value=compareTargetKeyForStream(compareStream)}else cmpReplay.value=compareFile;
@@ -772,7 +781,11 @@ async function buildSelectors(){
       if(target){compareFile=currentFile;compareInternalStreamId=sid;compareAnalysis=analysis;compareTelemetry=telemetry;compareStream=target;compareMapMeta=mapMeta;compareMapImage=mapImage}else compareFile='';
     }else{
       compareFile=raw;
-      if(compareFile&&compareFile!==currentFile){
+      if(compareFile===currentFile){
+        // Local lap-vs-lap uses the same authoritative analysis/telemetry object twice, with two
+        // different lap windows. No second load and no geometry-based lap guessing is introduced.
+        compareAnalysis=analysis;compareTelemetry=telemetry;compareStream=stream;compareMapMeta=mapMeta;compareMapImage=mapImage;
+      }else if(compareFile){
         [compareAnalysis,compareTelemetry]=await Promise.all([loadAnalysis(compareFile),loadTelemetry(compareFile)]);compareStream=localStream(compareTelemetry);
         const vm=await loadVisualMap(compareAnalysis);compareMapMeta=vm.meta;compareMapImage=vm.image;
       }
@@ -784,19 +797,23 @@ async function buildSelectors(){
 async function rebuildCompareLapOptions(){
   const sel=$('compareLap');sel.innerHTML='';
   if(!compareFile){sel.disabled=true;const o=document.createElement('option');o.textContent='—';o.value='';sel.appendChild(o);compareLap='';updateCompareRule();return}
-  const s=referenceStream(),internal=isInternalStreamCompare();
-  const laps=(s?.laps||[]).filter(l=>internal||compareFile!==currentFile||String(l.lap)!==String(currentLap));
+  const s=referenceStream(),internal=isInternalStreamCompare(),sameReplay=isSameReplayLapCompare();
+  // A local replay may be used as both sides, but never with the exact same lap on A and B.
+  // This is an identity/window rule, not a spatial heuristic: the lap numbers come directly from
+  // the replay-native lap table already published by telemetry.
+  const laps=(s?.laps||[]).filter(l=>internal||!sameReplay||String(l.lap)!==String(currentLap));
   if(!laps.length){sel.disabled=true;const o=document.createElement('option');o.textContent=internal?'低频影子没有可用圈信息':'没有可比圈';o.value='';sel.appendChild(o);compareLap='';updateCompareRule();return}
   sel.disabled=false;const placeholder=document.createElement('option');placeholder.value='';placeholder.textContent='请选择对比圈';sel.appendChild(placeholder);
   for(const l of laps){const o=document.createElement('option');o.value=String(l.lap);o.textContent=`圈 ${l.lap} · ${fmt(l.duration_s,3)}s`;sel.appendChild(o)}
-  const sameLap=(compareFile!==currentFile||isInternalStreamCompare())&&laps.some(l=>String(l.lap)===String(currentLap))?String(currentLap):'';
-  if(!compareLap||!laps.some(l=>String(l.lap)===String(compareLap)))compareLap=sameLap;
+  const sameLap=(!sameReplay)&&laps.some(l=>String(l.lap)===String(currentLap))?String(currentLap):'';
+  if(!compareLap||!laps.some(l=>String(l.lap)===String(compareLap)))compareLap=sameReplay?String(laps[0].lap):sameLap;
   sel.value=compareLap;sel.onchange=async()=>{compareLap=sel.value;customPath.referenceStartIdx=null;customPath.referenceEndIdx=null;selectedSector=null;hoverSector=null;await syncCurrentLapToCompare();renderAll()};updateCompareRule();
 }
 function updateCompareRule(){
   const r=currentRecord(),key=comparisonKey(r);
   if(!compareFile){$('compareRule').textContent=key?'同图可按 Resource / GameID / 同名地图匹配；默认不对比。':'当前没有可用于同图匹配的信息。';return}
   if(isInternalStreamCompare()){$('compareRule').textContent='本录像：本地高频影子 ↔ 联网低频影子；默认同圈号比较。';return}
+  if(isSameReplayLapCompare()){$('compareRule').textContent=`本录像圈间比较：A 圈${currentLap||'—'} ↔ B 圈${compareLap||'—'}；两圈独立选择，不跨圈猜测。`;return}
   const target=recordFor(compareFile);
   $('compareRule').textContent=`同图依据：${comparisonBasis(r,target)||'未确认'}。`;
 }

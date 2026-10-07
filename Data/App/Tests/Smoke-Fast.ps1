@@ -51,5 +51,5 @@ foreach($name in $tests){
 }
 $sw.Stop()
 Write-Host ''
-Write-Host ('[OK] Fast Gate passed. app=3.7.22 gate=fast tests='+$passed+'/'+$tests.Count+' real-replay=excluded structural=module-boundaries elapsed='+[Math]::Round($sw.Elapsed.TotalSeconds,1)+'s')
+Write-Host ('[OK] Fast Gate passed. app=3.7.23 gate=fast tests='+$passed+'/'+$tests.Count+' real-replay=excluded structural=module-boundaries elapsed='+[Math]::Round($sw.Elapsed.TotalSeconds,1)+'s')
 exit 0

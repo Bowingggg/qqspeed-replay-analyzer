@@ -844,9 +844,9 @@ function Get-SegmentComparisonSide([string]$AnalysisFile,[string]$StreamSelector
 
 # One comparison request. Body:
 #   subject_file_b64 (required), subject_stream (optional), subject_lap (required)
-#   compare_file_b64 or compare_stream (required: a real replay file, or an internal network shadow
-#                                                     of the SAME replay)
-#   compare_lap (required when compare_file_b64 is a different replay)
+#   compare_file_b64 or compare_stream (required: a real replay file, the SAME replay for a
+#                                                     different-lap comparison, or an internal network shadow)
+#   compare_lap (required for replay comparisons; it may name another lap of subject_file_b64)
 #   mode: 'auto' | 'custom'; custom: {side_key, start_d, end_d} for 'custom'
 function Invoke-SegmentComparisonLocal($Req) {
     try {

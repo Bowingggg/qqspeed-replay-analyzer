@@ -65,7 +65,7 @@ for($p=$Port;$p-lt($Port+20);$p++) {
 }
 if($null-eq$listener){throw '无法找到可用的本地前端端口。'}
 $url="http://127.0.0.1:$chosen/"
-Write-Host 'QQ Replay Web Frontend v3.7.22 · Native-First'
+Write-Host 'QQ Replay Web Frontend v3.7.23 · Native-First'
 Write-Host ('URL: '+$url)
 Write-Host '网页内可直接选择 .sav 分析；原始录像副本会存入 Data\ReplayArchive，供“重新分析已导入录像”按当前版本重新分析。'
 Write-Host '关闭此窗口即可停止前端服务。'

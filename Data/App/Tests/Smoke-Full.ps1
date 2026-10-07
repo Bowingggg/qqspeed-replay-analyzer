@@ -21,5 +21,5 @@ foreach($g in $gates){
 }
 $sw.Stop()
 Write-Host ''
-Write-Host ('[OK] Full Gate passed. app=3.7.22 gate=full composition=fast+real-regression elapsed='+[Math]::Round($sw.Elapsed.TotalSeconds,1)+'s architecture=native_first_v1 native-map=20.2.5.23-verified-av-tail native-driving=sections-v1/detector-v3 frontend-ab=monotonic-dp-v2/common-gate-preview-v2 action-audit=evidence-v1 telemetry-fast=qpf-v1/profile-v1/evidence-v1 native-action-cache=raw-evidence-v1/tail-window/lower-bound-fix real-native-benchmarks=required')
+Write-Host ('[OK] Full Gate passed. app=3.7.23 gate=full composition=fast+real-regression elapsed='+[Math]::Round($sw.Elapsed.TotalSeconds,1)+'s architecture=native_first_v1 native-map=20.2.5.23-verified-av-tail native-driving=sections-v1/detector-v3 frontend-ab=monotonic-dp-v2/common-gate-preview-v2 action-audit=evidence-v1 telemetry-fast=qpf-v1/profile-v1/evidence-v1 native-action-cache=raw-evidence-v1/tail-window/lower-bound-fix real-native-benchmarks=required')
 exit 0

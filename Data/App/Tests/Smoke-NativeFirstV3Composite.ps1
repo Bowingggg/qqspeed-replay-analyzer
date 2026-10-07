@@ -20,5 +20,5 @@ if(-not(Test-Path -LiteralPath $full -PathType Leaf)){throw 'Missing gate: Smoke
 if($LASTEXITCODE-ne0){throw ('Full Gate failed with exit '+[string]$LASTEXITCODE)}
 
 Write-Host ''
-Write-Host '[OK] Native-First v3 composite smoke passed (compat wrapper -> Full Gate). app=3.7.22 architecture=native_first_v1'
+Write-Host '[OK] Native-First v3 composite smoke passed (compat wrapper -> Full Gate). app=3.7.23 architecture=native_first_v1'
 exit 0

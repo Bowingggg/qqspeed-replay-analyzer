@@ -22,6 +22,8 @@
 //   T14 paired recovery fallback keeps earlier entry but caps primary time at the earlier natural recovery end
 //   T15 final/core/recovery decomposition keeps the published final-net result authoritative
 //   T16 first-run status gates Add Replay until game-path bootstrap is ready
+//   T17 one replay with multiple native laps can compare two different laps without A/B lap collapse
+//   T18 single-lap self-compare stays unavailable and external-replay same-lap sync is unchanged
 import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
@@ -416,6 +418,69 @@ const noPath=vm.runInContext('__t.uploadNoPath',ctx),notReady=vm.runInContext('_
 check(noPath.disabled===true&&/游戏目录/.test(noPath.title),'Add Replay is disabled until a game path is selected',JSON.stringify(noPath));
 check(notReady.disabled===true&&/初始化/.test(notReady.title),'Add Replay stays disabled while first-run game data is not ready',JSON.stringify(notReady));
 check(ready.disabled===false&&/添加/.test(ready.title),'Add Replay is enabled when first-run game data is ready',JSON.stringify(ready));
+
+// --- T17: same-replay lap-vs-lap comparison -------------------------------------------------
+section('same replay lap-vs-lap selector (T17)');
+await vm.runInContext(`(async()=>{
+  const multi={id:'shadow_local',role:'local_high_frequency',sample_hz:60,duration_s:30,
+    laps:[
+      {lap:1,start_t:0,end_t:10,duration_s:10},
+      {lap:2,start_t:10,end_t:20,duration_s:10},
+      {lap:3,start_t:20,end_t:30,duration_s:10}
+    ],preview:[]};
+  stream=multi;telemetry={streams:[multi]};analysis={map_name:'SYNTH',segment_analysis:{streams:[]}};
+  records=[{file:'multi_analysis.json',replay:'multi.sav',map:'SYNTH',course_key:'resource:900',streams:[{id:'shadow_local',role:'local_high_frequency',duration_s:30}]}];
+  currentFile='multi_analysis.json';currentLap='1';compareFile='';compareLap='';compareInternalStreamId='';
+  compareAnalysis=null;compareTelemetry=null;compareStream=null;compareMapMeta=null;compareMapImage=null;
+  $('currentLap').children=[];$('compareReplay').children=[];$('compareLap').children=[];
+  await buildSelectors();
+  __t.selfOption=$('compareReplay').children.find(o=>o.value===currentFile)||null;
+  $('compareReplay').value=currentFile;
+  await $('compareReplay').onchange();
+  __t.selfAfterSelect={currentLap,compareLap,compareFile,internal:compareInternalStreamId,rule:$('compareRule').textContent};
+  $('compareLap').value='3';
+  await $('compareLap').onchange();
+  __t.selfAfterB3={currentLap,compareLap};
+  $('currentLap').value='3';
+  await $('currentLap').onchange();
+  __t.selfAfterA3={currentLap,compareLap};
+  __t.selfRequest=comparisonRequestBody();
+})()`,ctx);
+const selfOpt=vm.runInContext('__t.selfOption',ctx),selfStart=vm.runInContext('__t.selfAfterSelect',ctx);
+const selfB3=vm.runInContext('__t.selfAfterB3',ctx),selfA3=vm.runInContext('__t.selfAfterA3',ctx);
+const selfReq=vm.runInContext('__t.selfRequest',ctx);
+check(!!selfOpt&&/本录像/.test(selfOpt.textContent)&&/圈间比较/.test(selfOpt.textContent),'a multi-lap replay exposes a self lap-comparison target',JSON.stringify(selfOpt&&selfOpt.textContent));
+check(selfStart.compareFile==='multi_analysis.json'&&selfStart.currentLap==='1'&&selfStart.compareLap==='2','selecting self defaults B to another real lap instead of the same lap',JSON.stringify(selfStart));
+check(/两圈独立选择/.test(selfStart.rule),'the UI explains that same-replay A/B lap selectors are independent',selfStart.rule);
+check(selfB3.currentLap==='1'&&selfB3.compareLap==='3','changing B from lap 2 to lap 3 does not move A',JSON.stringify(selfB3));
+check(selfA3.currentLap==='3'&&selfA3.compareLap==='1','moving A onto B current lap automatically keeps B on a different real lap',JSON.stringify(selfA3));
+check(selfReq.subject_file_b64===selfReq.compare_file_b64&&selfReq.subject_lap==='3'&&selfReq.compare_lap==='1'&&!selfReq.compare_stream,'same-replay comparison request uses one analysis file with two different native lap windows',JSON.stringify(selfReq));
+
+// --- T18: one-lap gating + external replay sync regression ----------------------------------
+section('same replay lap gate and external sync regression (T18)');
+await vm.runInContext(`(async()=>{
+  const one={id:'shadow_local',role:'local_high_frequency',sample_hz:60,duration_s:10,
+    laps:[{lap:1,start_t:0,end_t:10,duration_s:10}],preview:[]};
+  stream=one;telemetry={streams:[one]};records=[{file:'one_analysis.json',replay:'one.sav',map:'SYNTH',course_key:'resource:900',streams:[{id:'shadow_local',role:'local_high_frequency',duration_s:10}]}];
+  currentFile='one_analysis.json';currentLap='1';compareFile='';compareLap='';compareInternalStreamId='';
+  $('currentLap').children=[];$('compareReplay').children=[];$('compareLap').children=[];
+  await buildSelectors();
+  __t.oneLapSelfOption=$('compareReplay').children.some(o=>o.value===currentFile);
+  __t.oneLapDisabled=$('compareReplay').disabled;
+
+  const multiA={id:'a',role:'local_high_frequency',laps:[{lap:1},{lap:2},{lap:3}],preview:[]};
+  const multiB={id:'b',role:'local_high_frequency',laps:[{lap:1},{lap:2},{lap:3}],preview:[]};
+  stream=multiA;compareStream=multiB;currentFile='a_analysis.json';compareFile='b_analysis.json';
+  currentLap='2';compareLap='1';compareInternalStreamId='';
+  records=[{file:'a_analysis.json',map:'SYNTH',course_key:'resource:900'},{file:'b_analysis.json',map:'SYNTH',course_key:'resource:900'}];
+  $('compareLap').children=[];
+  await syncCompareLapToCurrent();
+  __t.externalSynced={currentLap,compareLap};
+})()`,ctx);
+check(vm.runInContext('__t.oneLapSelfOption',ctx)===false,'a one-lap replay does not expose a meaningless self comparison target');
+check(vm.runInContext('__t.oneLapDisabled',ctx)===true,'with no other targets, the B selector stays disabled for a one-lap replay');
+const extSync=vm.runInContext('__t.externalSynced',ctx);
+check(extSync.currentLap==='2'&&extSync.compareLap==='2','different-replay comparison keeps the established same-lap synchronization',JSON.stringify(extSync));
 
 console.log('\n'+(failures===0?'[OK] frontend segment/comparison contract passed.':'[FAILED] '+failures+' frontend contract assertion(s) failed.'));
 process.exit(failures===0?0:1);

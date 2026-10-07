@@ -1,5 +1,5 @@
 {
-  "app_version": "3.7.22",
+  "app_version": "3.7.23",
   "layout_version": 3,
   "architecture": "native_first_v1",
   "entrypoint": "Data\\App\\QQReplayFrontend.ps1",

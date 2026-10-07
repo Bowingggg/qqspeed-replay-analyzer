@@ -9,7 +9,7 @@
 <body>
 <header class="topbar">
   <div class="brand">QQ飞车录像分析</div>
-  <span class="tag">v3.7.22 Native-First</span>
+  <span class="tag">v3.7.23 Native-First</span>
   <span class="topState" id="topState">漂移分段</span>
   <span class="spacer"></span>
   <button class="btn dark" id="settingsBtn">设置</button>
@@ -62,11 +62,11 @@
         <div class="compareSide referenceSide">
           <div class="compareIdentityHead">
             <span class="identityLetter reference">B</span>
-            <div><b>对比录像</b><span id="compareReplayName">未选择</span></div>
+            <div><b>对比对象</b><span id="compareReplayName">未选择</span></div>
           </div>
           <div class="referenceControls">
             <div class="lapPick compareReplay compareControl">
-              <label>录像</label>
+              <label>对象</label>
               <select id="compareReplay"><option value="">不对比</option></select>
             </div>
             <div class="lapPick compareLap compareControl">
@@ -143,7 +143,7 @@
       <details class="advanced panel">
         <summary><span>高级 / 后续功能</span><small>后续指标暂不进入默认分析</small></summary>
         <div class="advancedBody">
-          <div class="pending">默认链路固定为“圈1 → Native Drift 分段 → 明确选择同图录像/圈”。自定义路径模式用于人工核对任意局部：A 手选空间起终点，B 不再单独选择端点。</div>
+          <div class="pending">默认链路固定为“当前圈 → Native Drift 分段 → 选择本录像其它圈或同图录像/圈”。同一录像的 A/B 圈次独立选择；自定义路径模式用于人工核对任意局部：A 手选空间起终点，B 不再单独选择端点。</div>
         </div>
       </details>
     </div>

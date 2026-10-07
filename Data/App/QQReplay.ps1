@@ -59,7 +59,7 @@ function Run-Analyze([string[]]$InputItems) {
     $game=Get-GamePath -AllowPrompt
     if([string]::IsNullOrWhiteSpace($game)-or-not(Test-Path -LiteralPath $game -PathType Container)){Write-Host '[FAILED] 未配置有效游戏目录。';return 1}
 
-    Write-Host 'QQ飞车录像分析器 v3.7.22 · Native-First'
+    Write-Host 'QQ飞车录像分析器 v3.7.23 · Native-First'
     Write-Host '规则: 不猜地图、不重建底图、不推断 DriftEnd、不自动 fallback 到旧语义。'
     Write-Host ('录像数: '+$files.Count)
     foreach($f in $files){Write-Host ('  '+[IO.Path]::GetFileName($f))}
