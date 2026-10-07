@@ -182,6 +182,28 @@ New-BareGit $pub 'public seed'
 $publisher=Join-Path $fixApp 'Tools\PublicRelease\Publish-PublicRelease.ps1'
 $stageOut=Join-Path $fix 'sandbox-out\stage'
 
+# PRECONDITION: the fixture copies of non-ASCII PowerShell sources must be byte-faithful UTF-8 with a
+# BOM. If a copy were mis-encoded, Windows PowerShell 5.1 would read Chinese source as ANSI and the
+# probe scripts below would fail with a confusing parse error instead of a clear cause. Fail fast.
+$fixtureEncodingErrors=New-Object System.Collections.Generic.List[string]
+foreach($probeFile in @($publisher,(Join-Path $fixApp 'Tests\Smoke-PublisherIsolation.ps1'),(Join-Path $fixApp 'Modules\Frontend\Frontend.Backend.ps1'))){
+    if(-not (Test-Path -LiteralPath $probeFile)){ continue }
+    $pb=[IO.File]::ReadAllBytes($probeFile)
+    $pBom=($pb.Length -ge 3 -and $pb[0] -eq 0xEF -and $pb[1] -eq 0xBB -and $pb[2] -eq 0xBF)
+    $pNonAscii=($pb | Where-Object { $_ -gt 127 } | Measure-Object).Count
+    if($pNonAscii -gt 0 -and -not $pBom){ $fixtureEncodingErrors.Add($probeFile) }
+    # A correctly encoded copy must still contain readable Chinese.
+    if($pNonAscii -gt 0 -and $pBom){
+        $pt=[IO.File]::ReadAllText($probeFile)
+        if($pt.Contains([char]0xFFFD)){ $fixtureEncodingErrors.Add($probeFile+' (replacement characters)') }
+    }
+}
+if($fixtureEncodingErrors.Count -gt 0){
+    Write-Host '[FAILED] fixture copy encoding is not byte-faithful UTF-8 + BOM:'
+    $fixtureEncodingErrors | ForEach-Object { Write-Host ('  - '+$_) }
+    exit 2
+}
+
 function Invoke-Publisher([string]$Action,[string]$ExtraArgs=''){
     # Argument ARRAY, never a single -Command string: the workspace path contains a space
     # ("QQ SPEED-录像分析"), and stringifying the command splits it.
@@ -234,7 +256,15 @@ $probeBlock="if(`$env:PROBE_DEVRoot){ `$DevRoot=`$env:PROBE_DEVRoot }`r`n" +
 $idx=$pubText.IndexOf("`$configPath=Join-Path `$DevRoot")
 if($idx -lt 0){ throw 'probe injection point not found in the publisher' }
 $probe=$pubText.Substring(0,$idx)+$probeBlock+$pubText.Substring($idx)
-[IO.File]::WriteAllBytes($guardScript,(New-Object System.Text.UTF8Encoding($true)).GetBytes($probe))
+# Write the BOM as explicit BYTES. `New-Object UTF8Encoding($true)` does not reliably emit the
+# preamble here, and a BOM-less probe makes Windows PowerShell 5.1 read the copied Chinese source as
+# ANSI, which corrupts it into a confusing parse error instead of a clear test failure.
+[IO.File]::WriteAllBytes($guardScript,[byte[]](0xEF,0xBB,0xBF)+(New-Object System.Text.UTF8Encoding($false)).GetBytes($probe))
+$probeBytes=[IO.File]::ReadAllBytes($guardScript)
+if(-not ($probeBytes.Length -ge 3 -and $probeBytes[0] -eq 0xEF -and $probeBytes[1] -eq 0xBB -and $probeBytes[2] -eq 0xBF)){
+    Write-Host '[FAILED] probe-guard.ps1 was written without a UTF-8 BOM'
+    exit 2
+}
 
 function Probe-Guard([string]$Path){
     $env:PROBE_PATH=$Path
@@ -270,6 +300,49 @@ $stageReadme=Join-Path $stageOut 'Data\App\README.md'
 $stageReadmeText=''
 if(Test-Path -LiteralPath $stageReadme){ $stageReadmeText=[IO.File]::ReadAllText($stageReadme) }
 Check 'C9 stage README is the PUBLIC README, not the internal one' (($stageReadmeText -match '项目维护方式') -and ($stageReadmeText -match 'MIT License') -and ($stageReadmeText -notmatch 'development repository')) 'README contract failed'
+
+# ---- 9b/9c: the repository ROOT must carry a real README.md and CHANGELOG.md ------------------
+# GitHub renders the repo-root README; without it the landing page shows "Add a README". The root
+# file must be the same authored document as Data/App/README.md, and the release notes must never
+# restate it.
+$rootReadme=Join-Path $stageOut 'README.md'
+$rootReadmeText=''
+if(Test-Path -LiteralPath $rootReadme){ $rootReadmeText=[IO.File]::ReadAllText($rootReadme) }
+Check 'C9b stage ROOT has README.md (so the GitHub landing page renders one)' (Test-Path -LiteralPath $rootReadme -PathType Leaf) ('root README missing at '+$rootReadme)
+Check 'C9c root README is the published document, not the internal Data/App copy' `
+    (($rootReadmeText -match '## 功能') -and ($rootReadmeText -match '## 快速开始') -and ($rootReadmeText -match '项目维护方式') -and (-not ($rootReadmeText -match 'development repository')) -and (-not ($rootReadmeText -match '本版新增'))) `
+    'root README content contract failed'
+Check 'C9d root README and Data/App/README.md are the same authored document' ($rootReadmeText -eq $stageReadmeText) 'the two README copies diverged'
+$rootChangelog=Join-Path $stageOut 'CHANGELOG.md'
+$rootChangelogText=''
+if(Test-Path -LiteralPath $rootChangelog){ $rootChangelogText=[IO.File]::ReadAllText($rootChangelog) }
+Check 'C9e stage ROOT has CHANGELOG.md with per-version sections' (($rootChangelogText -match '# Changelog') -and ($rootChangelogText -match '## v3\.7\.23') -and ($rootChangelogText -match '## v3\.7\.22')) 'CHANGELOG contract failed'
+
+# ---- 9f/9g/9h: document responsibility split -------------------------------------------------
+# The manifest must map the authored public README/CHANGELOG to BOTH the repo root and (for the
+# README) the in-project location, so a future release cannot silently lose the root file again.
+$cfgFixture=Get-Content -LiteralPath (Join-Path $fixApp 'Config\public_release_manifest.json') -Raw -Encoding UTF8 | ConvertFrom-Json
+$pubTargets=@($cfgFixture.include.public_files | ForEach-Object { [string]$_.target })
+$pubSources=@($cfgFixture.include.public_files | ForEach-Object { [string]$_.source })
+Check 'C9f manifest maps an authored README source to the repo root' (($pubTargets -contains 'README.md') -and ($pubSources -contains 'Public/README.md')) 'README root mapping missing'
+Check 'C9g manifest maps an authored CHANGELOG source to the repo root' (($pubTargets -contains 'CHANGELOG.md') -and ($pubSources -contains 'Public/CHANGELOG.md')) 'CHANGELOG root mapping missing'
+$rna=$cfgFixture.release_notes_assertions
+Check 'C9h manifest forbids README product sections in the release notes' `
+    ((@($rna.must_not_contain) -contains '## 功能') -and (@($rna.must_not_contain) -contains '## 快速开始') -and (@($rna.must_not_contain) -contains '## 隐私')) `
+    'release-notes/README split not asserted'
+# The derived release notes must be short and version-scoped. Ask the publisher's own documented
+# `probe` self-test action to render them, so the split is proven by behaviour and not only by
+# configuration. The action refuses to run without PP_PROBE_ACTION, and is checked here too.
+$LF=[char]10
+$env:PP_PROBE_VERSION='3.7.23'
+$env:PP_PROBE_ACTION='release-notes'
+$notesOut=Invoke-Child @('-NoLogo','-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-File',$publisher,'-Action','probe','-DevRoot',$fix)
+$notesText=[string]$notesOut.out
+$env:PP_PROBE_ACTION=''
+$noEnv=Invoke-Child @('-NoLogo','-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-File',$publisher,'-Action','probe','-DevRoot',$fix)
+Check 'C9i-0 the probe action refuses to run without its explicit opt-in' (([string]$noEnv.out) -match 'PP_PROBE_ACTION is required') ('probe without opt-in: '+(($noEnv.all -split "`n" | Select-Object -First 2) -join ' | '))
+$notesOk=(($notesText -match 'NOTES-BEGIN') -and ($notesText -match '# QQ飞车录像分析器 v3\.7\.23') -and ($notesText -match '## 本版变化') -and ($notesText -match '## 下载') -and (-not ($notesText -match '## 功能')) -and (-not ($notesText -match '## 快速开始')) -and (-not ($notesText -match '## 隐私')) -and (-not ($notesText -match '系统要求')))
+Check 'C9i derived release notes are short and version-scoped (not a README copy)' $notesOk ('notes head: '+([string]::Join(' | ',@($notesText -split [regex]::Escape($LF) | Select-Object -First 3))))
 
 # ---- 11: CONTRIBUTING policy must exist ------------------------------------------------------
 $contrib=Join-Path $stageOut 'CONTRIBUTING.md'

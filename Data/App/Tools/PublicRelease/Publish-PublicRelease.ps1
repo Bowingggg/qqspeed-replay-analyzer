@@ -26,7 +26,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory=$true)]
-    [ValidateSet('check','stage','release','verify')]
+    [ValidateSet('check','stage','release','verify','probe')]
     [string]$Action,
 
     # Development root. Defaults to the repository root this script lives in.
@@ -193,7 +193,66 @@ function Invoke-ConfigCheck {
 
     if($failures.Count -gt 0){ Write-Host ('[check] FAILURES='+$failures.Count); exit 2 }
     Write-Host '[check] manifest and isolation guards OK'
+
+    # The three document responsibilities must not be mixed. Verify the CHANGELOG carries a section
+    # for this exact version, so the GitHub Release body can be derived from it.
+    $changelog=Get-PublicChangelog
+    $section=Get-ChangelogSection $changelog $appVersion
+    if([string]::IsNullOrWhiteSpace($section)){ Fail ('CHANGELOG.md has no section for v'+$appVersion) }
+    else { Pass ('CHANGELOG.md has a v'+$appVersion+' section') }
+    $notes=New-ReleaseNotes $appVersion $section
+    foreach($s in @($cfg.release_notes_assertions.must_contain)){ if($notes -notmatch [regex]::Escape([string]$s)){ Fail ('release notes missing: '+$s) } }
+    foreach($s in @($cfg.release_notes_assertions.must_not_contain)){ if($notes -match [regex]::Escape([string]$s)){ Fail ('release notes must not contain README content: '+$s) } }
+    $noteLines=@($notes -split "`r?`n").Count
+    if($noteLines -gt [int]$cfg.release_notes_assertions.max_lines){ Fail ('release notes too long: '+$noteLines+' lines') }
+    else { Pass ('release notes are short ('+$noteLines+' lines) and version-scoped') }
+    if($failures.Count -gt 0){ Write-Host ('[check] FAILURES='+$failures.Count); exit 2 }
+    Write-Host '[check] document responsibility split OK'
     exit 0
+}
+
+# --- canonical documents ------------------------------------------------------------------------
+function Get-PublicChangelog {
+    $p=Get-CfgPath 'Data/App/Public/CHANGELOG.md'
+    if(-not (Test-Path -LiteralPath $p -PathType Leaf)){ throw ('public CHANGELOG missing: '+$p) }
+    return [IO.File]::ReadAllText($p)
+}
+
+# The `## vX.Y.Z` section of the changelog: its bullets, WITHOUT the heading and without the
+# `---` separators. This is the single source for a version's release description.
+function Get-ChangelogSection([string]$Changelog,[string]$Version){
+    $lines=$Changelog -split "`r?`n"
+    $start=-1
+    for($i=0;$i -lt $lines.Count;$i++){
+        if($lines[$i] -match ('^##\s+v'+[regex]::Escape($Version)+'\s*$')){ $start=$i+1; break }
+    }
+    if($start -lt 0){ return '' }
+    $body=New-Object System.Collections.Generic.List[string]
+    for($i=$start;$i -lt $lines.Count;$i++){
+        if($lines[$i] -match '^##\s'){ break }
+        if($lines[$i] -match '^\s*---\s*$'){ continue }
+        $body.Add($lines[$i])
+    }
+    return (($body -join "`n").Trim())
+}
+
+# GitHub Release body = this version's changes only, plus a short pointer section. It must never
+# restate the README: no product intro, no quick start, no architecture, no privacy/license text.
+function New-ReleaseNotes([string]$Version,[string]$Section){
+    $zipName='QQReplay-'+$Version+'.zip'
+    $sb=New-Object System.Text.StringBuilder
+    [void]$sb.AppendLine('# QQ飞车录像分析器 v'+$Version)
+    [void]$sb.AppendLine('')
+    [void]$sb.AppendLine('## 本版变化')
+    [void]$sb.AppendLine('')
+    [void]$sb.AppendLine($Section)
+    [void]$sb.AppendLine('')
+    [void]$sb.AppendLine('## 下载')
+    [void]$sb.AppendLine('')
+    [void]$sb.AppendLine('下载本 Release 中的 `'+$zipName+'`；校验和见 `SHA256SUMS.txt`。')
+    [void]$sb.AppendLine('')
+    [void]$sb.AppendLine('完整功能与使用说明见 `README.md`；完整版本历史见 `CHANGELOG.md`。')
+    return $sb.ToString().TrimEnd()
 }
 
 function Invoke-StageBuild {
@@ -313,13 +372,29 @@ function Invoke-StageBuild {
             }
         }
     }
-    # README / LICENSE contract
+    # README / CHANGELOG / LICENSE contract.
+    #
+    # Responsibility split enforced here:
+    #   README.md     = current product documentation (no release-specific content)
+    #   CHANGELOG.md  = version history only (no product documentation)
+    #   GitHub Release = that version's changes only (derived from CHANGELOG, never from README)
     $ra=$cfg.readme_assertions
-    $readmePath=Join-Path $stagePath ($ra.file -replace '/','\')
-    $readme=''
-    if(Test-Path -LiteralPath $readmePath){ $readme=[IO.File]::ReadAllText($readmePath) } else { $violations.Add('README missing: '+$ra.file) }
-    foreach($s in @($ra.must_contain)){ if($readme -notmatch [regex]::Escape($s)){ $violations.Add('README-MISSING-TEXT: '+$s) } }
-    foreach($s in @($ra.must_not_contain)){ if($readme -match [regex]::Escape($s)){ $violations.Add('README-FORBIDDEN-TEXT: '+$s) } }
+    $readmeTargets=@($ra.file)+@($ra.also_files)
+    foreach($rt in $readmeTargets){
+        $rp=Join-Path $stagePath ($rt -replace '/','\')
+        $txt=''
+        if(Test-Path -LiteralPath $rp){ $txt=[IO.File]::ReadAllText($rp) } else { $violations.Add('README missing: '+$rt); continue }
+        foreach($s in @($ra.must_contain)){ if($txt -notmatch [regex]::Escape($s)){ $violations.Add('README-MISSING-TEXT ('+$rt+'): '+$s) } }
+        foreach($s in @($ra.must_not_contain)){ if($txt -match [regex]::Escape($s)){ $violations.Add('README-FORBIDDEN-TEXT ('+$rt+'): '+$s) } }
+    }
+    $ca=$cfg.changelog_assertions
+    if($ca){
+        $cp=Join-Path $stagePath ($ca.file -replace '/','\')
+        $ct=''
+        if(Test-Path -LiteralPath $cp){ $ct=[IO.File]::ReadAllText($cp) } else { $violations.Add('CHANGELOG missing: '+$ca.file) }
+        foreach($s in @($ca.must_contain)){ if($ct -notmatch [regex]::Escape($s)){ $violations.Add('CHANGELOG-MISSING-TEXT: '+$s) } }
+        foreach($s in @($ca.must_not_contain)){ if($ct -match [regex]::Escape($s)){ $violations.Add('CHANGELOG-FORBIDDEN-TEXT: '+$s) } }
+    }
     $la=$cfg.license_assertions
     $licensePath=Join-Path $stagePath ($la.file -replace '/','\')
     $license=''
@@ -386,8 +461,23 @@ function Invoke-ReleaseArtifact {
     $sha=(Get-FileHash -LiteralPath $zipPath -Algorithm SHA256).Hash.ToLowerInvariant()
     $sums=Join-Path $releasePath 'SHA256SUMS.txt'
     [IO.File]::WriteAllBytes($sums,(New-Object System.Text.UTF8Encoding($false)).GetBytes($sha+'  '+$zipName+"`n"))
+
+    # Canonical release notes: derived from THIS version's CHANGELOG section, never assembled from
+    # the README. Asserted so a future change cannot quietly pull product documentation back in.
+    $section=Get-ChangelogSection (Get-PublicChangelog) $version
+    if([string]::IsNullOrWhiteSpace($section)){ throw ('CHANGELOG.md has no section for v'+$version) }
+    $notes=New-ReleaseNotes $version $section
+    $rna=$cfg.release_notes_assertions
+    foreach($s in @($rna.must_contain)){ if($notes -notmatch [regex]::Escape([string]$s)){ throw ('release notes missing: '+$s) } }
+    foreach($s in @($rna.must_not_contain)){ if($notes -match [regex]::Escape([string]$s)){ throw ('release notes must not contain README content: '+$s) } }
+    $noteLines=@($notes -split "`r?`n").Count
+    if($noteLines -gt [int]$rna.max_lines){ throw ('release notes too long: '+$noteLines+' lines') }
+    $notesPath=Join-Path $releasePath 'RELEASE_NOTES.md'
+    [IO.File]::WriteAllBytes($notesPath,[byte[]](0xEF,0xBB,0xBF)+(New-Object System.Text.UTF8Encoding($false)).GetBytes($notes+"`n"))
+
     Write-Host ('[release] artifact='+$zipName+' bytes='+(Get-Item -LiteralPath $zipPath).Length)
     Write-Host ('[release] sha256='+$sha)
+    Write-Host ('[release] notes=RELEASE_NOTES.md lines='+$noteLines+' source=CHANGELOG.md#'+$version)
     exit 0
 }
 
@@ -411,4 +501,25 @@ switch($Action){
     'stage'   { Invoke-StageBuild }
     'release' { Invoke-ReleaseArtifact }
     'verify'  { Invoke-Verify }
+    'probe'   {
+        # Self-test hook used by Tests\Smoke-PublisherIsolation.ps1 to exercise this script's own
+        # document helpers (changelog section extraction + release-note rendering) from an isolated
+        # copy. It deliberately requires PP_PROBE_ACTION so it can never fire by accident, and it
+        # only emits text: it writes no file, touches no git state and never pushes.
+        if([string]::IsNullOrWhiteSpace($env:PP_PROBE_ACTION)){
+            Write-Host '[probe] PP_PROBE_ACTION is required for this self-test action'
+            exit 3
+        }
+        if($env:PP_PROBE_ACTION -eq 'release-notes'){
+            $changelog=Get-PublicChangelog
+            $section=Get-ChangelogSection $changelog ([string]$env:PP_PROBE_VERSION)
+            $notes=New-ReleaseNotes ([string]$env:PP_PROBE_VERSION) $section
+            Write-Host 'NOTES-BEGIN'
+            Write-Host $notes
+            Write-Host 'NOTES-END'
+            exit 0
+        }
+        Write-Host ('[probe] unknown PP_PROBE_ACTION: '+$env:PP_PROBE_ACTION)
+        exit 3
+    }
 }
