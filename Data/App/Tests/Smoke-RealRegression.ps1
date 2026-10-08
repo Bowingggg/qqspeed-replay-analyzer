@@ -43,5 +43,5 @@ foreach($name in $tests){
 }
 $sw.Stop()
 Write-Host ''
-Write-Host ('[OK] Real Regression gate passed. app=3.7.23 gate=real-regression tests='+$passed+'/'+$tests.Count+' evidence=real-replay elapsed='+[Math]::Round($sw.Elapsed.TotalSeconds,1)+'s')
+Write-Host ('[OK] Real Regression gate passed. app=3.7.24 gate=real-regression tests='+$passed+'/'+$tests.Count+' evidence=real-replay elapsed='+[Math]::Round($sw.Elapsed.TotalSeconds,1)+'s')
 exit 0

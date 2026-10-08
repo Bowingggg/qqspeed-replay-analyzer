@@ -27,6 +27,10 @@ $tests=@(
     'Smoke-AnalysisSegments.ps1',
     'Smoke-SegmentComparison.ps1',
     'Smoke-FrontendSegmentContract.ps1',
+    # Frontend transport: every api request must reach a terminal state. This is the regression for
+    # the v3.7.24 bug where idle keep-alive connections blocked the accept loop and every
+    # backend-backed button hung with no response.
+    'Smoke-HttpTransport.ps1',
     'Smoke-FirstRunBootstrap.ps1',
     'Smoke-ReplayVisibility.ps1',
     'Smoke-TrainingAnalysis.ps1',
@@ -51,5 +55,5 @@ foreach($name in $tests){
 }
 $sw.Stop()
 Write-Host ''
-Write-Host ('[OK] Fast Gate passed. app=3.7.23 gate=fast tests='+$passed+'/'+$tests.Count+' real-replay=excluded structural=module-boundaries elapsed='+[Math]::Round($sw.Elapsed.TotalSeconds,1)+'s')
+Write-Host ('[OK] Fast Gate passed. app=3.7.24 gate=fast tests='+$passed+'/'+$tests.Count+' real-replay=excluded structural=module-boundaries elapsed='+[Math]::Round($sw.Elapsed.TotalSeconds,1)+'s')
 exit 0

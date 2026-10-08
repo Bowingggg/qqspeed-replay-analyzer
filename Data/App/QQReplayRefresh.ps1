@@ -43,7 +43,7 @@ function Archive-WebUploads{if(-not(Test-Path -LiteralPath $webUploadRoot)){retu
 if(-not(Test-Path -LiteralPath $analyzerScript)){throw 'QQReplay.ps1 不存在。'}
 $game=Get-GamePathLocal;if([string]::IsNullOrWhiteSpace($game)){throw '尚未配置有效游戏目录。'}
 New-Item -ItemType Directory -Force -Path $archiveRoot|Out-Null
-Write-Host 'QQ飞车录像分析 v3.7.23 · Native-First development rebuild'
+Write-Host 'QQ飞车录像分析 v3.7.24 · Native-First development rebuild'
 Write-Host '重建当前派生输出；只重建当前分析列表中的录像；Replay Catalog 只提供 source/lifecycle 信息，不再充当重建队列。'
 
 # ---------------------------------------------------------------------------
@@ -122,5 +122,5 @@ foreach($f in @(Get-ChildItem -LiteralPath $outputDir -Filter '*_analysis.json' 
     else{Write-Host ('[Driving] '+[string]$j.replay_file+' · status='+[string]$d.status+' · no stream result')}
 }
 Write-Host ''
-Write-Host ('[汇总] Native-First v3.7.23 重构完成：active='+[string]$active.Count+' · 成功='+$ok+' / 失败='+$bad+' / 跳过='+$skipped+'；ReplayArchive='+[string]@(Get-ReplaySourceInventory -DataDir $dataDir).Count+'（source 存在不等于 active）；NativeMap ready='+$nativeMapReady+' / missing='+$nativeMapMissing+'；Driving ready='+$driveReady+' / other='+$driveOther+' / sections='+$driveSections+'；语义回退=none；底图=官方 map.nif。')
+Write-Host ('[汇总] Native-First v3.7.24 重构完成：active='+[string]$active.Count+' · 成功='+$ok+' / 失败='+$bad+' / 跳过='+$skipped+'；ReplayArchive='+[string]@(Get-ReplaySourceInventory -DataDir $dataDir).Count+'（source 存在不等于 active）；NativeMap ready='+$nativeMapReady+' / missing='+$nativeMapMissing+'；Driving ready='+$driveReady+' / other='+$driveOther+' / sections='+$driveSections+'；语义回退=none；底图=官方 map.nif。')
 if($bad-gt0){exit 1};exit 0

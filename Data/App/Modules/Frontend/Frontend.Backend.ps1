@@ -481,15 +481,88 @@ function Save-GamePathLocal([string]$GamePath) {
     [IO.File]::WriteAllText($settingsPath,(ConvertTo-Json -InputObject $obj -Depth 4),$enc)
     return $g
 }
+# The folder picker is shown MODALLY OWNED BY A TEMPORARY FOREGROUND FORM.
+#
+# `FolderBrowserDialog.ShowDialog()` with no owner gets no owner window, so Windows is free to place
+# it behind the browser window that triggered it; users then read that as "the button did nothing".
+# An owned window is always painted above its owner, so a hidden TopMost owner form forces the picker
+# to the front. The owner is created and disposed per invocation (never left alive, never left
+# TopMost, never affecting any other window), and the dialog is ALWAYS disposed.
+function Initialize-GamePathPickerActivation {
+    if($global:QQReplayPickerActivationReady){ return }
+    $global:QQReplayPickerActivationReady=$true
+    try {
+        Add-Type -TypeDefinition @'
+using System;
+using System.Runtime.InteropServices;
+public static class QQReplayPickerActivation {
+    [DllImport("user32.dll")] private static extern bool SetForegroundWindow(IntPtr hWnd);
+    [DllImport("user32.dll")] private static extern bool BringWindowToTop(IntPtr hWnd);
+    [DllImport("user32.dll")] private static extern IntPtr GetForegroundWindow();
+    [DllImport("user32.dll")] private static extern uint GetWindowThreadProcessId(IntPtr hWnd, IntPtr pid);
+    [DllImport("user32.dll")] private static extern bool AttachThreadInput(uint idAttach, uint idAttachTo, bool attach);
+    [DllImport("kernel32.dll")] private static extern uint GetCurrentThreadId();
+    // Best effort only. Windows may refuse SetForegroundWindow for a process that does not own the
+    // current foreground window; attaching to that window's input thread lifts that restriction and
+    // is detached again immediately.
+    public static void Activate(IntPtr hWnd) {
+        if(hWnd == IntPtr.Zero) { return; }
+        try {
+            IntPtr fg = GetForegroundWindow();
+            uint target = GetWindowThreadProcessId(fg, IntPtr.Zero);
+            uint self = GetCurrentThreadId();
+            bool attached = false;
+            if(target != 0 && target != self) { attached = AttachThreadInput(self, target, true); }
+            try { BringWindowToTop(hWnd); SetForegroundWindow(hWnd); }
+            finally { if(attached) { AttachThreadInput(self, target, false); } }
+        } catch { }
+    }
+}
+'@ -ErrorAction Stop
+    } catch {
+        # If the helper cannot be compiled the picker still works; only the foreground nudge is lost.
+        $global:QQReplayPickerActivationReady=$false
+    }
+}
 function Select-GamePathLocal {
     Add-Type -AssemblyName System.Windows.Forms | Out-Null
-    $dlg=New-Object System.Windows.Forms.FolderBrowserDialog
-    $dlg.Description='请选择 QQ飞车 游戏安装目录'
-    $dlg.ShowNewFolderButton=$false
-    $cur=Get-GamePathLocal
-    if($cur){ try{$dlg.SelectedPath=$cur}catch{} }
-    if($dlg.ShowDialog() -ne [System.Windows.Forms.DialogResult]::OK){ return $null }
-    return Save-GamePathLocal $dlg.SelectedPath
+    Initialize-GamePathPickerActivation
+    $owner=$null
+    $dlg=$null
+    try {
+        # A zero-size, hidden, TopMost owner: it is never seen, but it makes the picker an owned
+        # modal window so Windows keeps it above the browser that triggered it.
+        $owner=New-Object System.Windows.Forms.Form
+        $owner.FormBorderStyle=[System.Windows.Forms.FormBorderStyle]::None
+        $owner.ShowInTaskbar=$false
+        $owner.StartPosition=[System.Windows.Forms.FormStartPosition]::CenterScreen
+        $owner.TopMost=$true
+        $owner.Width=1
+        $owner.Height=1
+        $owner.Opacity=0
+        $owner.Show()
+        $owner.Activate()
+
+        $dlg=New-Object System.Windows.Forms.FolderBrowserDialog
+        $dlg.Description='请选择 QQ飞车 游戏安装目录'
+        $dlg.ShowNewFolderButton=$false
+        $cur=Get-GamePathLocal
+        if($cur){ try{$dlg.SelectedPath=$cur}catch{} }
+
+        if($global:QQReplayPickerActivationReady){
+            try { [QQReplayPickerActivation]::Activate($owner.Handle) } catch {}
+        }
+        if($dlg.ShowDialog($owner) -ne [System.Windows.Forms.DialogResult]::OK){ return $null }
+        return Save-GamePathLocal $dlg.SelectedPath
+    } finally {
+        # Always release: the owner must never stay alive, hidden, or TopMost after the picker closes.
+        if($null-ne$dlg){ try{$dlg.Dispose()}catch{} }
+        if($null-ne$owner){
+            try{$owner.TopMost=$false}catch{}
+            try{$owner.Hide()}catch{}
+            try{$owner.Dispose()}catch{}
+        }
+    }
 }
 
 # First-run bootstrap contract. A clean installation is usable after the user selects the game

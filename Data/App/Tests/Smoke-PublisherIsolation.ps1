@@ -334,14 +334,14 @@ Check 'C9h manifest forbids README product sections in the release notes' `
 # `probe` self-test action to render them, so the split is proven by behaviour and not only by
 # configuration. The action refuses to run without PP_PROBE_ACTION, and is checked here too.
 $LF=[char]10
-$env:PP_PROBE_VERSION='3.7.23'
+$env:PP_PROBE_VERSION=[string](Get-Content -LiteralPath (Join-Path $fixApp 'app_manifest.json') -Raw -Encoding UTF8 | ConvertFrom-Json).app_version
 $env:PP_PROBE_ACTION='release-notes'
 $notesOut=Invoke-Child @('-NoLogo','-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-File',$publisher,'-Action','probe','-DevRoot',$fix)
 $notesText=[string]$notesOut.out
 $env:PP_PROBE_ACTION=''
 $noEnv=Invoke-Child @('-NoLogo','-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-File',$publisher,'-Action','probe','-DevRoot',$fix)
 Check 'C9i-0 the probe action refuses to run without its explicit opt-in' (([string]$noEnv.out) -match 'PP_PROBE_ACTION is required') ('probe without opt-in: '+(($noEnv.all -split "`n" | Select-Object -First 2) -join ' | '))
-$notesOk=(($notesText -match 'NOTES-BEGIN') -and ($notesText -match '# QQ飞车录像分析器 v3\.7\.23') -and ($notesText -match '## 本版变化') -and ($notesText -match '## 下载') -and (-not ($notesText -match '## 功能')) -and (-not ($notesText -match '## 快速开始')) -and (-not ($notesText -match '## 隐私')) -and (-not ($notesText -match '系统要求')))
+$notesOk=(($notesText -match 'NOTES-BEGIN') -and ($notesText -match ('# QQ飞车录像分析器 v' + [regex]::Escape($env:PP_PROBE_VERSION))) -and ($notesText -match '## 本版变化') -and ($notesText -match '## 下载') -and (-not ($notesText -match '## 功能')) -and (-not ($notesText -match '## 快速开始')) -and (-not ($notesText -match '## 隐私')) -and (-not ($notesText -match '系统要求')))
 Check 'C9i derived release notes are short and version-scoped (not a README copy)' $notesOk ('notes head: '+([string]::Join(' | ',@($notesText -split [regex]::Escape($LF) | Select-Object -First 3))))
 
 # ---- 11: CONTRIBUTING policy must exist ------------------------------------------------------
