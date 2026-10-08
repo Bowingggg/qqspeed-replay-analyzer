@@ -15,7 +15,8 @@ function Send-Text($Stream,[int]$Status,[string]$ContentType,[string]$Text) { Se
 # speculative connection and send nothing at all. A synchronous `NetworkStream.ReadByte()` cannot be
 # time-limited (`Stream.ReadTimeout` does not apply to it), so a read that starts on an idle
 # connection blocks forever. If that read runs on the accept thread, EVERY later request - the whole
-# settings / clear-cache / refresh UI - stops being served. That was the v3.7.23 regression.
+# settings / clear-cache / refresh UI - stops being served. That was the regression first reported against the v3.7.23 release,
+# and fixed in v3.7.24.
 #
 # `ReadAsync` + a bounded wait gives a real deadline: an idle connection is abandoned and the accept
 # loop moves on. This returns the whole raw message (head + body) for `Parse-HttpRequest`.

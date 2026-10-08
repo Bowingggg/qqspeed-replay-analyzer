@@ -1,4 +1,4 @@
-param(
+﻿param(
     [string]$AppDir = (Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path))
 )
 $ErrorActionPreference='Stop'
@@ -28,7 +28,7 @@ $tests=@(
     'Smoke-SegmentComparison.ps1',
     'Smoke-FrontendSegmentContract.ps1',
     # Frontend transport: every api request must reach a terminal state. This is the regression for
-    # the v3.7.24 bug where idle keep-alive connections blocked the accept loop and every
+    # v3.7.23 bug (fixed in v3.7.24) where idle keep-alive connections blocked the accept loop and
     # backend-backed button hung with no response.
     'Smoke-HttpTransport.ps1',
     'Smoke-FirstRunBootstrap.ps1',
